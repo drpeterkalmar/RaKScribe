@@ -1,0 +1,12 @@
+[API_KEYS]
+# Hierher kommen die persönlichen API Schüssel bzw. Schlüsseldateien
+
+# !!! WICHTIG: DATEI vor dem ersten Start IN CONFIG.INI UMBENENNEN
+
+# Der API-Schlüssel von OpenAI - beginnt mit sk-... - ACHUTNG: OHNE ""
+OPENAI_API_KEY = 
+
+# Der Dateiname der Google Cloud JSON-Schlüsseldatei, z.B. GoogleCloud-xxxxxxxxxxxx.json - ACHTUNG OHNE ""
+# Wichtig: Die Datei MUSS im selben Ordner wie das Skript/die .exe liegen!
+GOOGLE_JSON_FILENAME = 
+

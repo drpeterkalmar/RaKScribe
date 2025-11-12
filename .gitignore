@@ -1,0 +1,9 @@
+# Sensible Konfigurationsdatei
+config.ini
+rakscribe-0ff1ffd128a1.json
+
+# PyInstaller Artefakte
+*.exe
+dist/
+build/
+__pycache__/
