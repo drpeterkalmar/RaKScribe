@@ -53,8 +53,3 @@ C. Diktat testen
     • Klicken Sie auf "Diktat Start / Stopp".
     • Achten Sie auf den Mikrofonpegel (Balken muss ausschlagen).
     • Nach dem Stoppen erfolgt die automatische Strukturierung durch GPT-4o und die Formatierung (HTML-Text für Word) wird in die Zwischenablage kopiert.
-
-💡 Nächste Schritte
-Um die App nahtlos aus dem RIS/PACS zu steuern, empfiehlt sich die Implementierung der globalen Tastenkombinationen (Hotkeys).
-Vielleicht mit Vertex AI statt 4o zum Rennen bringen...
-Auf die deutsche Version von enhanced und medical warten
