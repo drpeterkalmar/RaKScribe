@@ -32,6 +32,7 @@ Schlüssel und die Google JSON-Datei im Projektordner hinterlegen.
 🚀 Viel Spaß!
 
 💡 Nächste Schritte
+- Pfade in der .exe berichtigen sys._MEIPASS
 - Um die App nahtlos aus dem RIS/PACS zu steuern, empfiehlt sich die Implementierung der globalen Tastenkombinationen (Hotkeys).
 - Vielleicht mit Vertex AI statt 4o zum Rennen bringen oder OAIwhisper chunks verarbeiten lassen.
 - Auf die deutsche Version des enhanced speechrecocnition models warten
