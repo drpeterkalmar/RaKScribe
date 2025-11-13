@@ -1,7 +1,6 @@
-## RaKScribe - Version 0.9b 
+## RaKScribe - Version 0.9c
 # Hybrid Streaming Diktat und Structured Reporting (Google STT + OpenAI GPT-4o Strukturierung)
-# StartStopp mit F10, kopiert anschließend fertigen Befund direkt im HTML/RTF Format in die Zwischenablage 
-# PLAN FÜR NÄCHSTE VERSION: und fügt sie ins offene Wordfenster ein
+# StartStopp mit F10, kopiert anschließend fertigen Befund direkt im HTML/RTF Format in die Zwischenablage und fügt sie ins offene Wordfenster ein
 
 import keyboard 
 import tkinter as tk
@@ -324,6 +323,7 @@ class GigaScribeApp:
 
     # --- 4. Verarbeitungs-Logik (OpenAI GPT Strukturierung) ---
     
+    
     def process_dictation(self):
         try:
             # 1. Text-Extraktion und Sicherheitscheck
@@ -358,8 +358,12 @@ class GigaScribeApp:
             self.master.after(0, self.result_text.insert, tk.END, final_report)
             self.master.after(0, self.status_label.config, {'text': "Status: Befund fertig!", 'style': 'Success.TLabel'}) 
             
-            # 4. Automatisch kopieren
+            # 4. Automatisch kopieren (Legt formatierten Text in Zwischenablage)
             self.master.after(0, self.copy_formatted_report) 
+            
+            # 5. AUTOMATISCHES EINFÜGEN (Strg+V)
+            # Führt Strg+V nach 100ms Verzögerung aus (gibt Clipboard Zeit, sich zu füllen)
+            self.master.after(100, lambda: keyboard.press_and_release('ctrl+v')) # <-- HIER KOMMT DER HOTKEY HIN
             
         except Exception as e:
             self.master.after(0, messagebox.showerror, "KI/API Fehler", f"Ein Fehler ist beim API-Aufruf aufgetreten: {e}. Prüfen Sie GPT-4o Key/Guthaben.")
@@ -368,7 +372,7 @@ class GigaScribeApp:
         finally:
             self.master.after(0, self.record_button.config, {'text': "Diktat Start / Stopp", 'state': tk.NORMAL})
             self.master.after(0, self.update_level_bar, 0)
-            
+    
     
     
     
