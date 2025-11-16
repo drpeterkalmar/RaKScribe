@@ -465,7 +465,7 @@ class GigaScribeApp:
             self.master.after(0, self.status_label.config, {'text': "Status: FEHLER! (API/Guthaben)", 'style': 'Danger.TLabel'}) 
             
         finally:
-            self.master.after(0, self.record_button.config, {'text': "Diktat Start / Stopp", 'state': tk.NORMAL})
+            self.master.after(0, self.record_button.config, {'text': "F10 Diktat Start / Stopp", 'state': tk.NORMAL})
             self.master.after(0, self.update_level_bar, 0)
     
     
