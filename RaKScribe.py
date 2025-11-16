@@ -1,4 +1,4 @@
-## RaKScribe - Version 1.0
+## RaKScribe - Version 1.01
 # Hybrid Streaming Diktat und Structured Reporting (Google STT + OpenAI GPT-4o Strukturierung)
 # StartStopp mit F10, kopiert anschließend fertigen Befund direkt im HTML/RTF Format in die Zwischenablage und fügt sie ins offene Wordfenster ein - bitte Überschrift 1,2 und Fließtext in Word vorformatieren
 
@@ -13,6 +13,7 @@ from scipy.io.wavfile import write
 import numpy as np
 import threading
 import os
+import sys  # WICHTIG: sys für PyInstaller-Pfadlogik importieren
 import time
 import pyperclip
 import markdown
@@ -26,19 +27,47 @@ from google.oauth2 import service_account
 from openai import OpenAI
 import configparser
 
+
+# =========================================================================
+# === PFAD-LOGIK: Stellt sicher, dass die Dateien neben der EXE liegen ===
+# =========================================================================
+# Definiert den korrekten Basis-Pfad (BASE_DIR) für PyInstaller und normales Skript
+if getattr(sys, 'frozen', False):
+    # Wenn als EXE verpackt (PyInstaller): Der Pfad zur EXE ist der Basis-Pfad.
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    # Wenn als normales Python-Skript ausgeführt: Der Pfad zum Skript ist der Basis-Pfad.
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Definiere den vollständigen Pfad zur Konfigurationsdatei
+CONFIG_FILE_PATH = os.path.join(BASE_DIR, 'config.ini')
+# =========================================================================
+
+
 config = configparser.ConfigParser()
 
 try:
-    # Laden der Schlüssel aus config.ini
-    config.read('config.ini')
+    # Laden der Schlüssel aus config.ini über den korrekten Pfad
+    # config.read('config.ini')
+    config.read(CONFIG_FILE_PATH)
+    
+    # Überprüfen, ob die Datei überhaupt gelesen wurde
+    if not config.sections():
+        raise FileNotFoundError(f"Konfigurationsdatei konnte nicht gelesen werden.")
+        
     OPENAI_API_KEY = config['API_KEYS']['OPENAI_API_KEY'].strip()
+    # Entfernt Anführungszeichen und Leerzeichen aus dem Dateinamen
     GOOGLE_JSON_FILENAME = config['API_KEYS']['GOOGLE_JSON_FILENAME'].strip().replace('"', '')
 except KeyError:
     print("FEHLER: Konfigurationsdatei (config.ini) ist unvollständig oder fehlt. Bitte prüfen Sie die Schlüssel im Abschnitt [API_KEYS].")
     exit()
+except FileNotFoundError as e:
+    print(f"FATALER FEHLER: Konfigurationsdatei ('config.ini') nicht gefunden.")
+    print(f"Stellen Sie sicher, dass 'config.ini' im selben Verzeichnis wie die ausführbare Datei liegt: {BASE_DIR}")
+    exit()
 
 # Definiert den Pfad zum JSON-Schlüssel relativ zum Skript-Standort.
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# BASE_DIR ist nun immer der Ordner der EXE/des Skripts.
 SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, GOOGLE_JSON_FILENAME)
 
 # Globale Definition der Clients
@@ -138,13 +167,14 @@ STREAMING_CONFIG = speech.StreamingRecognitionConfig(
 def load_prompt_template(filename="radiology_prompt.txt"):
     """Lädt den Inhalt der Prompt-Datei."""
     try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(base_dir, filename)
+        # KORREKTUR: Nutzt den global definierten BASE_DIR Pfad
+        # base_dir = os.path.dirname(os.path.abspath(__file__)) 
+        file_path = os.path.join(BASE_DIR, filename)
         
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.read().strip()
     except FileNotFoundError:
-        messagebox.showerror("Fehler", f"Die Prompt-Datei '{filename}' wurde nicht gefunden. Bitte prüfen Sie den Ordner.")
+        messagebox.showerror("Fehler", f"Die Prompt-Datei '{filename}' wurde nicht gefunden. Bitte prüfen Sie, ob sie neben der EXE liegt.")
         return ""
     except Exception as e:
         messagebox.showerror("Fehler", f"Fehler beim Laden der Prompt-Datei: {e}")
