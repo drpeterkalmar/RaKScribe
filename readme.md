@@ -1,4 +1,4 @@
-🚀 RaKScribe - Installations- und Einrichtungsanleitung (v0.9)
+🚀 RaKScribe - Installations- und Einrichtungsanleitung 
 Willkommen bei RaKScribe, dem hybriden Diktier-Tool für strukturierte radiologische Berichte.
 RaKScribe kombiniert die Geschwindigkeit des Google Cloud Streamings mit der Strukturierungsintelligenz von OpenAI GPT-4o. Beachten Sie: Für die Nutzung fallen API-Kosten an (ca. 1,3 Cent pro Befund, Stand Nov. 2025).
 
@@ -18,10 +18,9 @@ Python 3.10 oder neuer
 OpenAI	API-Schlüssel (für das Modell gpt-4o)	
 Google Cloud JSON Datei mit aktivierter "Cloud Speech-to-Text API"	
 
-🇩🇪 Sprachhinweis: Das RaKScribe-Projekt ist in seiner aktuellen Version (v0.9) vollständig auf die deutsche Sprache fixiert. 
+🇩🇪 Sprachhinweis: Das RaKScribe-Projekt ist in seiner aktuellen Version vollständig auf die deutsche Sprache fixiert. 
 Dies betrifft sowohl die Spracherkennung (language_code="de-DE" in Google Cloud STT) als auch die gesamte Befundstrukturierung durch GPT-4o (radiology_prompt.txt). 
 Eine Nutzung in anderen Sprachen erfordert Anpassungen im Code und im Prompt-Template. 
-
 
 📦 Installation der Abhängigkeiten
 Pakete installieren aus requirements.txt, Audio-Treiber testen
@@ -29,10 +28,5 @@ Pakete installieren aus requirements.txt, Audio-Treiber testen
 🔐 Authentifizierung einrichten
 Schlüssel und die Google JSON-Datei im Projektordner hinterlegen.
 
-🚀 Viel Spaß!
+🚀 Spracherkennung mit F10 starten und stoppen - Struktierter Befund wird in ein offenes Textfenster eingefügt (Bitte Formatvorlagen Ü1, Ü2 und Fließtext vorformatieren) 
 
-💡 Nächste Schritte
-- Pfade in der .exe berichtigen sys._MEIPASS
-- Um die App nahtlos aus dem RIS/PACS zu steuern, empfiehlt sich die Implementierung der globalen Tastenkombinationen (Hotkeys).
-- Vielleicht mit Vertex AI statt 4o zum Rennen bringen oder OAIwhisper chunks verarbeiten lassen.
-- Auf die deutsche Version des enhanced speechrecocnition models warten
