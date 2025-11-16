@@ -1,14 +1,14 @@
 ⚙️ Voraussetzungen und API-Zugriff
 
-🇩🇪 Sprachhinweis: Das RaKScribe-Projekt ist in seiner aktuellen Version (v0.9) vollständig auf die deutsche Sprache fixiert. 
+🇩🇪 Sprachhinweis: Das RaKScribe-Projekt ist in seiner aktuellen Version vollständig auf die deutsche Sprache fixiert. 
 Dies betrifft sowohl die Spracherkennung (language_code="de-DE" in Google Cloud STT) als auch die gesamte Befundstrukturierung durch GPT-4o (radiology_prompt.txt). 
 Eine Nutzung in anderen Sprachen erfordert Anpassungen im Code und im Prompt-Template. 
 
 
 Die Nutzung erfordert die Einrichtung von kostenpflichtigen Cloud-Diensten.
 A. Python-Umgebung
-    • Python 3.10 oder neuer muss installiert sein. Verwendet wurde 3.14
-    • WICHTIG: Die PowerShell/CMD muss die Python-Befehle (python, pip) erkennen können.
+    • Python 3.10 oder neuer muss installiert sein. Erstellt wurde mit 3.14 .
+    • WICHTIG: Die Shell/CMD muss die Python-Befehle (python, pip) erkennen können.
 B. Cloud-API-Voraussetzungen
 Dienst	Notwendiger Zugang	Bemerkung
 OpenAI	API-Schlüssel (für das Modell gpt-4o)	Das Guthaben muss ausreichend sein, um das Modell aufrufen zu können.
@@ -34,8 +34,8 @@ A. Konfigurationsdatei erstellen
     3. Öffnen Sie die config.ini und ersetzen Sie die Platzhalter (YOUR_...) durch Ihre tatsächlichen Schlüssel und den Dateinamen des Google-Schlüssels:
 
 [API_KEYS]
-OPENAI_API_KEY = IHR_SCHLUESSEL_sk-proj-HIER
-GOOGLE_JSON_FILENAME = IHRE_DATEI_rakscribe-123456789yyy.json
+OPENAI_API_KEY = IHR-SCHLÜSSEL-sk-proj....-HIER
+GOOGLE_JSON_FILENAME = IHRE_DATEI_rakscribe-123456789yyy.json-HIER
 
 B. Google JSON-Schlüssel hinterlegen
     • Legen Sie die heruntergeladene .json-Datei (mit Ihrem privaten Schlüssel) in denselben Ordner wie die rakscribe0.9.py.
@@ -43,13 +43,12 @@ B. Google JSON-Schlüssel hinterlegen
 🚀 Erster Start und Optimierung
 A. Anwendung starten
 Starten Sie die App über die Kommandozeile:
-
-python rakscribe0.9.py
+python rakscribe.py
 
 B. Prompt-Vorlage anpassen
     • Die KI-Anweisungen (Terminologie-Regeln, Abkürzungen etc.) werden aus der Datei radiology_prompt.txt geladen.
     • WICHTIG: Passen Sie die Regeln in dieser Datei an die lokalen Befundungsgewohnheiten und Abkürzungen an. Sie ist das Herzstück der Strukturierung.
 C. Diktat testen
-    • Klicken Sie auf "Diktat Start / Stopp".
+    • F10 oder Button f "Diktat Start / Stopp" für Spracherkennung.
     • Achten Sie auf den Mikrofonpegel (Balken muss ausschlagen).
-    • Nach dem Stoppen erfolgt die automatische Strukturierung durch GPT-4o und die Formatierung (HTML-Text für Word) wird in die Zwischenablage kopiert.
+    • Nach dem Stoppen erfolgt die automatische Strukturierung durch GPT-4o und der strukturierte Befund (HTML-Text für Word) wird in ein offenes Textfenster eingefügt. Bitte Formatvorlagen      Überschrift1, Überscshrift2 und Fließtext("Standard" in Word) vorformatieren.
