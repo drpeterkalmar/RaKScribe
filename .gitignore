@@ -1,5 +1,6 @@
-# Sensible Konfigurationsdatei
+# Sensible Konfigurationsdatei mit API Schlüssel für OpenAI
 config.ini
+# Private API für Google Cloud
 rakscribe-0ff1ffd128a1.json
 
 # PyInstaller Artefakte
