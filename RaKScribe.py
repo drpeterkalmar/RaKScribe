@@ -224,7 +224,7 @@ class GigaScribeApp:
                                       font=('Tahoma', 12, 'bold'))
         self.status_label.grid(row=0, column=0, sticky='w', pady=5)
         
-        self.record_button = ttk.Button(main_frame, text="Diktat Start / Stopp", command=self.toggle_recording, 
+        self.record_button = ttk.Button(main_frame, text="F10 Diktat Start / Stopp", command=self.toggle_recording, 
                                        bootstyle=(DANGER, OUTLINE), 
                                        width=20) 
         self.record_button.grid(row=0, column=1, sticky='e', pady=5)
@@ -288,7 +288,7 @@ class GigaScribeApp:
             
             # KORRIGIERT: Status-Änderung über Style
             self.status_label.config(text="Status: AUFNAHME LÄUFT... (Rot)", style="Danger.TLabel")
-            self.record_button.config(text="Diktat Stoppen")
+            self.record_button.config(text="F10 Diktat Stoppen")
             
             self.thread = threading.Thread(target=self.record)
             self.thread.start()
