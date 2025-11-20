@@ -25,7 +25,8 @@ Die Nutzung erfordert die Einrichtung von kostenpflichtigen Cloud-Diensten.
 
 ## 2. Installation der Abhängigkeiten 📦
 
-Öffnen Sie die PowerShell oder CMD und navigieren Sie in das Hauptverzeichnis des Projekts:
+Öffnen Sie die PowerShell oder den Terminal (macOS/Linux) und navigieren Sie in das Hauptverzeichnis des Projekts:
+WINDOWS:
 
     cd C:\Pfad\zu\RaKScribe
 LINUX/MACOS:
