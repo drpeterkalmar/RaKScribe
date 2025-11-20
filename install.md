@@ -101,7 +101,7 @@ Bei Bedarf kann das Python-Skript in eine ausführbare Datei umgewandelt werden.
 
     pyinstaller --noconsole --onefile --clean --name RaKScribe RaKScribe.py 
 
-Wichtig für die Nutzung: Die fertige Datei finden Sie anschließend im Unterordner dist/. 
+Die fertige Datei finden Sie anschließend im Unterordner dist/. 
 
 🟦Windows: RaKScribe.exe
 
