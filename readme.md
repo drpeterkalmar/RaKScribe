@@ -2,7 +2,7 @@
 Willkommen bei **RaKScribe**, dem hybriden Diktier-Tool für strukturierte radiologische Befunde.
 
 RaKScribe kombiniert die Geschwindigkeit der Spracherkennung des Google Cloud Streamings mit der relativ preiswerten Strukturierungsintelligenz von OpenAI GPT-4o. 
-> **Hinweis:** Für die Nutzung fallen API-Kosten an (ca. 1,3 Cent pro Befund, Stand Nov. 2025).
+> **Hinweis:** Für die Nutzung fallen API-Kosten an (ca. 1,3 Cent pro Befundminute, Stand Nov. 2025).
 
 ## 💡 Konzept und Begründung der Hybrid-Architektur
 
