@@ -54,6 +54,7 @@ Damit die App funktioniert, müssen der OpenAI-Schlüssel und die Google-Cloud-D
 
     [API_KEYS]
     OPENAI_API_KEY = sk-proj-IHR-SCHLÜSSEL-HIER
+    
     GOOGLE_JSON_FILENAME = 1234-IHRE-DATE-HIER.json
 
 ### B. Google JSON-Schlüssel hinterlegen
