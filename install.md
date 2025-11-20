@@ -97,8 +97,8 @@ Starten Sie die App über die Kommandozeile:
 Bei Bedarf kann das Python-Skript in eine eigenständige `.exe`-Datei umgewandelt werden. Dies erfordert das Paket `pyinstaller`.
 
 **Befehl für die Erstellung:**
-```bash
-pyinstaller --noconsole --onefile --clean --name RaKScribe RaKScribe.py
+
+    pyinstaller --noconsole --onefile --clean --name RaKScribe RaKScribe.py 
 
 Bei⚠️ Wichtig für die Nutzung: Die fertige Datei finden Sie anschließend im Ordner dist/. Damit die .exe startet, müssen folgende Dateien in denselben Ordner kopiert werden:
 
