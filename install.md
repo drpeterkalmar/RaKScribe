@@ -1,54 +1,82 @@
-⚙️ Voraussetzungen und API-Zugriff
+# ⚙️ Installations- und Einrichtungsanleitung
 
-🇩🇪 Sprachhinweis: Das RaKScribe-Projekt ist in seiner aktuellen Version vollständig auf die deutsche Sprache fixiert. 
-Dies betrifft sowohl die Spracherkennung (language_code="de-DE" in Google Cloud STT) als auch die gesamte Befundstrukturierung durch GPT-4o (radiology_prompt.txt). 
-Eine Nutzung in anderen Sprachen erfordert Anpassungen im Code und im Prompt-Template. 
+> **🇩🇪 Wichtiger Sprachhinweis:**
+> Das RaKScribe-Projekt ist in seiner aktuellen Version **vollständig auf die deutsche Sprache fixiert**.
+> Dies betrifft sowohl die Spracherkennung (`language_code="de-DE"` in Google Cloud STT) als auch die gesamte Befundstrukturierung durch GPT-4o (`radiology_prompt.txt`). Eine Nutzung in anderen Sprachen erfordert Anpassungen im Code und im Prompt-Template.
 
+---
+
+## 1. Voraussetzungen und API-Zugriff
 
 Die Nutzung erfordert die Einrichtung von kostenpflichtigen Cloud-Diensten.
-A. Python-Umgebung
-    • Python 3.10 oder neuer muss installiert sein. Erstellt wurde mit 3.14 .
-    • WICHTIG: Die Shell/CMD muss die Python-Befehle (python, pip) erkennen können.
-B. Cloud-API-Voraussetzungen
-Dienst	Notwendiger Zugang	Bemerkung
-OpenAI	API-Schlüssel (für das Modell gpt-4o)	Das Guthaben muss ausreichend sein, um das Modell aufrufen zu können.
-Google Cloud	Dienstkonto mit aktivierter "Cloud Speech-to-Text API"	Der API-Schlüssel (JSON-Datei) muss volle Rechte für diese API besitzen.
 
-📦 Installation der Abhängigkeiten
-Öffnen Sie die PowerShell oder CMD und navigieren Sie in das Hauptverzeichnis des Projekts (cd C:\RaKScribe\RaKScribe).
-A. Pakete installieren
-Installieren Sie alle notwendigen Python-Bibliotheken in einem Schritt:
+### A. Python-Umgebung
+* **Python 3.10 oder neuer** muss installiert sein. (Entwickelt und getestet mit Python 3.14).
+* **WICHTIG:** Die Shell/CMD muss die Python-Befehle (`python`, `pip`) erkennen können (zu PATH hinzufügen).
 
-pip install -r requirements.txt
+### B. Cloud-API-Voraussetzungen
 
-B. Audio-Treiber testen
-Stellen Sie sicher, dass das Mikrofon erkannt wird:
+| Dienst | Notwendiger Zugang | Bemerkung |
+| :--- | :--- | :--- |
+| **OpenAI** | API-Schlüssel (für Modell `gpt-4o`) | Das Guthaben (Credits) muss ausreichend sein, um das Modell aufrufen zu können. |
+| **Google Cloud** | Dienstkonto mit aktivierter "Cloud Speech-to-Text API" | Der Schlüssel (JSON-Datei) muss volle Rechte für die STT-API besitzen. |
 
-python -m sounddevice
+---
 
-🔐 Authentifizierung einrichten
-Sie müssen Ihre Schlüssel und die Google JSON-Datei im Projektordner hinterlegen.
-A. Konfigurationsdatei erstellen
-    1. Kopieren Sie die Musterdatei config.ini.example.
-    2. Benennen Sie die Kopie um in config.ini.
-    3. Öffnen Sie die config.ini und ersetzen Sie die Platzhalter (YOUR_...) durch Ihre tatsächlichen Schlüssel und den Dateinamen des Google-Schlüssels:
+## 2. Installation der Abhängigkeiten 📦
 
-[API_KEYS]
-OPENAI_API_KEY = IHR-SCHLÜSSEL-sk-proj....-HIER
-GOOGLE_JSON_FILENAME = IHRE_DATEI_rakscribe-123456789yyy.json-HIER
+Öffnen Sie die PowerShell oder CMD und navigieren Sie in das Hauptverzeichnis des Projekts:
 
-B. Google JSON-Schlüssel hinterlegen
-    • Legen Sie die heruntergeladene .json-Datei (mit Ihrem privaten Schlüssel) in denselben Ordner wie die rakscribe0.9.py.
+    cd C:\Pfad\zu\RaKScribe
 
-🚀 Erster Start und Optimierung
-A. Anwendung starten
+### A. Pakete installieren
+Installieren Sie alle notwendigen Python-Bibliotheken in einem Schritt (scipy ist nicht mehr notwendig):
+
+    pip install -r requirements.txt
+
+### B. Audio-Treiber testen
+Stellen Sie sicher, dass das Mikrofon erkannt wird und Treiber (PortAudio) vorhanden sind:
+
+    python -m sounddevice
+
+*(Sollte eine Liste der verfügbaren Audio-Geräte ausgeben).*
+
+---
+
+## 3. Authentifizierung einrichten 🔐
+
+Damit die App funktioniert, müssen der OpenAI-Schlüssel und die Google-Cloud-Datei hinterlegt werden.
+
+### A. Konfigurationsdatei erstellen
+1.  Kopieren Sie die Musterdatei `config.ini.example` (falls vorhanden) oder erstellen Sie eine neue Datei.
+2.  Benennen Sie die Datei um in **`config.ini`**.
+3.  Öffnen Sie die Datei und fügen Sie folgenden Inhalt ein (ersetzen Sie die Platzhalter):
+
+    [API_KEYS]
+    OPENAI_API_KEY = sk-proj-IHR-SCHLÜSSEL-HIER
+    GOOGLE_JSON_FILENAME = google_service_account.json
+
+### B. Google JSON-Schlüssel hinterlegen
+Legen Sie die von Google heruntergeladene `.json`-Datei (Service Account Key) direkt in denselben Ordner wie die `RaKScribe.py`. Achten Sie darauf, dass der Dateiname exakt mit dem Eintrag in der `config.ini` übereinstimmt.
+
+---
+
+## 4. Erster Start und Optimierung 🚀
+
+### A. Anwendung starten
 Starten Sie die App über die Kommandozeile:
-python rakscribe.py
 
-B. Prompt-Vorlage anpassen
-    • Die KI-Anweisungen (Terminologie-Regeln, Abkürzungen etc.) werden aus der Datei radiology_prompt.txt geladen.
-    • WICHTIG: Passen Sie die Regeln in dieser Datei an die lokalen Befundungsgewohnheiten und Abkürzungen an. Sie ist das Herzstück der Strukturierung.
-C. Diktat testen
-    • F10 oder Button f "Diktat Start / Stopp" für Spracherkennung.
-    • Achten Sie auf den Mikrofonpegel (Balken muss ausschlagen).
-    • Nach dem Stoppen erfolgt die automatische Strukturierung durch GPT-4o und der strukturierte Befund (HTML-Text für Word) wird in ein offenes Textfenster eingefügt. Bitte Formatvorlagen      Überschrift1, Überscshrift2 und Fließtext("Standard" in Word) vorformatieren.
+    python RaKScribe.py
+
+### B. Prompt-Vorlage anpassen
+* Die KI-Anweisungen (Terminologie-Regeln, Abkürzungen, Normalbefunde) werden aus der Datei `radiology_prompt.txt` geladen.
+* **WICHTIG:** Passen Sie die Regeln in dieser Datei an Ihre lokalen Befundungsgewohnheiten an. Diese Datei ist das Herzstück der Strukturierung!
+
+### C. Diktat testen
+1.  Drücken Sie **F10** oder den Button "Diktat Start / Stopp".
+2.  Sprechen Sie in das Mikrofon (der Pegel-Balken muss ausschlagen).
+3.  Drücken Sie erneut **F10** zum Stoppen.
+4.  **Automatischer Export:** Nach kurzer Verarbeitung durch GPT-4o wird der strukturierte Befund in die Zwischenablage kopiert und automatisch eingefügt.
+
+> **💡 Tipp für Word:**
+> Damit der Befund perfekt aussieht, sollten in Ihrem Word-Dokument die Formatvorlagen **"Überschrift 1"**, **"Überschrift 2"** und **"Standard"** (Fließtext) sauber vorformatiert sein. RaKScribe nutzt HTML-Formatierung, die diese Stile anspricht.
