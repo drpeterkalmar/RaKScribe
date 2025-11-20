@@ -1,4 +1,4 @@
-# 🚀 RaKScribe - Übersicht
+# 🚀 RaKScribe
 Willkommen bei **RaKScribe**, dem hybriden Diktier-Tool für strukturierte radiologische Befunde.
 
 RaKScribe kombiniert die Geschwindigkeit der Spracherkennung des Google Cloud Streamings mit der relativ preiswerten Strukturierungsintelligenz von OpenAI GPT-4o. 
