@@ -391,7 +391,7 @@ Sinus frontales: regelrecht angelegt, glatte Wandkonturen, freie Pneumatisation.
 - MR der Halsweichteile: 
 Halsweichteile: normale Konfiguration, HWS in regelrechter Stellung. Mundbodenmuskulatur: seitensymmetrisch und regulär ausgebildet. Spatia oris und Spatia colli: gut abgrenzbar und frei. Mitdargestellte Anteile der Glandula parotidea und Glandula submandibularis: ohne Pathologie. Pharynx und Larynx: mit regelrechter Wandbegrenzung und normaler Wandstärke. Schilddrüse: weitgehend symmetrisch angelegt, normal groß. Lobi glandulae thyroideae: normale Binnenstruktur. Halsgefäße: unauffällige Abbildung (soweit beurteilbar). Halsmuskulatur: normale Strukturen. Lymphknotenstationen: frei. Myelon cervicales und Plexus cervicalis: ohne Pathologie. Septum nasi: mittelständig. Conchae nasales: normale Ausbildung und Signalgebung. Cavitas nasi, parapharyngeale Strukturen (soweit abgebildet): unauffällig. Mitdargestellte Anteile des Neurocranium und der Orbita: ohne Pathologie.
 
-- MR der Thoraxorgane: 
+- MR des Thorax: 
 Lungen: regulär belüftet und allseits der Thoraxwand anliegend. Kein Nachweis umschriebener pleuraler Signalveränderung oder Flüssigkeitsansammlung. Pulmo-Struktur: regelrecht, Gefäßzeichnung normal. Keine intrapulmonalen Rundherde oder flächenhaften Veränderungen. Mediastinum: normal breit, mittelständig. Kein Nachweis von Raumforderungen im vorderen, mittleren oder hinteren Kompartiment. Hilusregion: beidseits unauffällig, Bronchi principales normal abgebildet. Keine pathologischen Lymphknoten, keine perihiläre RF. Herz: normal konfiguriert, orthotop, Herzhöhlen normal weit. Große intrathorakale sowie mitdargestellte supraaortale Vasa: unauffällig. Skelett Thoracis sowie Weichteile Thoracis: regelrechte Darstellung.
 
 - MR der Mamma: 
@@ -460,6 +460,25 @@ Ductus choledochus: orthotope Lage, normkalibrig, reguläre Länge, homogene fl�
 
 - MR der Halsarterien: 
 Aortenbogen: glattwandig, regelrecht konfiguriert dargestellt. Truncus brachiocephalicus: ordnungsgemäßer Abgang, regelrechte Aufteilung in die unauffälligen Arteria subclavia, Arteria carotis communis und Arteria vertebralis dextra. Die linke Arteria carotis communis und Arteria vertebralis: entspringen regulär direkt aus dem Arcus aortae. Normales Kaliber, regelhaft weites Lumen ohne Einengung oder Kontrastmittelaussparungen. Bifurcationes arteriae carotidis: beidseits orthotop und regulär geformt. Arteria carotis externa und insbesondere Arteria carotis interna: beidseits normkalibrig und seitensymmetrisch dargestellt. Keine umschriebene Gefäßaufweitung oder Einengung. Gefäßlumen: homogenes Füllungsbild. Pars siphonalis: normal, ohne Verlagerung oder Impression. Arteriae vertebrales: seitensymmetrische Anlage und regelrechter Verlauf. Lumen: normal weit, ohne Füllungsdefekte oder Kaliberunregelmäßigkeiten bis hin zur Arteria basilaris. Mitdargestellte Halsanteile (soweit dargestellt und beurteilbar): ohne Pathologie.
+
+- CCT:
+Interhemisphärenspalt: mittelständig. Innere und äußere Liquorräume: altersentsprechende Weite. Hirnparenchym: keine Raumforderung, keine intrakranielle Blutung, keine frische Ischämiedemarkierung. Kalotte und Weichteile: regelrecht.
+
+- CT Thorax:
+Lunge: regelrecht belüftet und entfaltet, keine Infiltrate, keine Rundherde. Pleura: keine Ergüsse. Mediastinum: keine pathologisch vergrößerten Lymphknoten. Herz: regelrecht groß, kein Perikarderguss. Gefäße: Aorta und Pulmonalarterien kaliberregelrecht. Keine Emboliezeichen (falls KM). Skelett: keine suspekten osteolytischen oder osteoplastischen Läsionen.
+
+- CT Abdomen:
+Leber: homogen, glatt begrenzt, keine fokalen Läsionen. Gallenblase: normal groß, unauffällige Wand, steinfrei. Gallenwege: nicht erweitert. Pankreas: regelrecht lobuliert, keine Raumforderung. Milz: homogen, normale Größe. Nieren: beidseits unauffällig, kein Aufstau, keine Konkremente. Nebennieren: schlank. Gefäße: Bauchaorta und große Abgänge regelrecht. Darm: keine pathologische Wandverdickung, kein Ileus. Abdomen gesamt: keine freie Flüssigkeit oder Luft.
+
+- CT der Wirbelsäule:
+Achsenverhältnisse: regelrecht. Wirbelkörper: erhaltene Höhe und Hinterkantenflucht. Knochenstruktur: keine frischen Frakturen, keine fokalen Läsionen. Spinalkanal und Neuroforamina: unauffällig. Paravertebrale Weichteile: unauffällig.
+
+- CT Angiographie:
+Arterielle Strombahn: regelrechte Kontrastierung. Gefäßstatus: keine hämodynamisch relevanten Stenosen oder Verschlüsse. Wandstruktur: keine Aneurysmata oder Dissektionen. Periarterielle Weichteile: unauffällig.
+
+- Polytrauma CT: 
+CCT: keine Blutung, keine Infarktzeichen. Wirbelsäule: keine Fraktur, keine Gefügestörung. Thorax: kein Pneumo- oder Hämatothorax. Keine Organläsionen. Abdomen: keine freie intraabdominelle Luft oder Flüssigkeit, keine Organruptur, keine Raumforderung. Becken: keine Fraktur. Keine Blutung.
+
 
 **DIKTATTEXT ZUR VERARBEITUNG:**
 {roh_text}
