@@ -1,6 +1,6 @@
-## RaKScribe - Version 1.02 (verkleiner, kein scipy)
+## RaKScribe - (c) 2024 Dr. Peter Kalmar - Licensed under GPLv3
 # Hybrid Streaming Diktat und Structured Reporting
-# Optimierungen: Google 'latest_long', Scipy entfernt, Boost angepasst
+# letzte Änderung: Google 'latest_long', Scipy entfernt, Boost angepasst
 
 import keyboard 
 import tkinter as tk

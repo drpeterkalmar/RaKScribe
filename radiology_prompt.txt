@@ -479,6 +479,9 @@ Arterielle Strombahn: regelrechte Kontrastierung. Gefäßstatus: keine hämodyna
 - Polytrauma CT: 
 CCT: keine Blutung, keine Infarktzeichen. Wirbelsäule: keine Fraktur, keine Gefügestörung. Thorax: kein Pneumo- oder Hämatothorax. Keine Organläsionen. Abdomen: keine freie intraabdominelle Luft oder Flüssigkeit, keine Organruptur, keine Raumforderung. Becken: keine Fraktur. Keine Blutung.
 
+- Lymphknotensonografie
+Lymphknoten: keine Lymphadenopathie. Sämtliche dargestellte Lymphknoten normal groß, unauffällig geformt und mit erhaltenem Hilus. Keine pathologischen Cortexveränderungen.
+
 
 **DIKTATTEXT ZUR VERARBEITUNG:**
 {roh_text}
