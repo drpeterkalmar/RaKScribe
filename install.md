@@ -89,3 +89,24 @@ Starten Sie die App über die Kommandozeile:
 
 > **💡 Tipp für Word:**
 > Damit der Befund perfekt aussieht, sollten in Ihrem Word-Dokument die Formatvorlagen **"Überschrift 1"**, **"Überschrift 2"** und **"Standard"** (Fließtext) sauber vorformatiert sein. RaKScribe nutzt HTML-Formatierung, die diese Stile anspricht.
+
+---
+
+## 5. Optional: Als .EXE kompilieren - zB Windows: 🏗️
+
+Bei Bedarf kann das Python-Skript in eine eigenständige `.exe`-Datei umgewandelt werden. Dies erfordert das Paket `pyinstaller`.
+
+**Befehl für die Erstellung:**
+```bash
+pyinstaller --noconsole --onefile --clean --name RaKScribe RaKScribe.py
+
+Bei⚠️ Wichtig für die Nutzung: Die fertige Datei finden Sie anschließend im Ordner dist/. Damit die .exe startet, müssen folgende Dateien in denselben Ordner kopiert werden:
+
+config.ini
+
+radiology_prompt.txt
+
+Die Google-JSON-Datei
+
+
+
