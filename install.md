@@ -29,7 +29,7 @@ Ihre APIs finden Sie unter https://platform.openai.com/api-keys bzw. https://con
 
 Öffnen Sie die PowerShell oder den Terminal (macOS/Linux) und navigieren Sie in das Hauptverzeichnis des Projekts:
 
-🪟WINDOWS:
+🪟WINDOWS: Terminal im Installationsverzeichnis öffnen oder
 
     cd C:\Pfad\zu\RaKScribe
 🐧LINUX oder 🍏MACOS:
