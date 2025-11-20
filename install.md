@@ -28,6 +28,9 @@ Die Nutzung erfordert die Einrichtung von kostenpflichtigen Cloud-Diensten.
 Öffnen Sie die PowerShell oder CMD und navigieren Sie in das Hauptverzeichnis des Projekts:
 
     cd C:\Pfad\zu\RaKScribe
+LINUX/MACOS:
+
+    cd ~/RaKScribe
 
 ### A. Pakete installieren
 Installieren Sie alle notwendigen Python-Bibliotheken in einem Schritt:
