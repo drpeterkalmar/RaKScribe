@@ -3,8 +3,13 @@ config.ini
 # Private API für Google Cloud
 rakscribe-0ff1ffd128a1.json
 
-# PyInstaller Artefakte
-*.exe
+# allfälliges
+*.json
+*.ini
 dist/
 build/
+*.spec
+
+# PyInstaller Artefakte
+*.exe
 __pycache__/
