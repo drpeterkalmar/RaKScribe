@@ -32,7 +32,7 @@ RaKScribe nutzt eine hybride Cloud-Lösung, um die jeweiligen Stärken der führ
 Pakete installieren aus `requirements.txt` und Audio-Treiber testen.
 
 ### 🔐 2. Authentifizierung einrichten
-API-Schlüssel und die Google JSON-Datei im Projektordner hinterlegen.
+OPENAI-API-Schlüssel und die Google JSON-Datei im Projektordner hinterlegen.
 
 ### 🚀 3. Starten
 Spracherkennung mit **F10** starten und stoppen.  
