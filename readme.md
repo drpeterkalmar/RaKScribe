@@ -11,7 +11,7 @@ RaKScribe nutzt eine hybride Cloud-Lösung, um die jeweiligen Stärken der führ
 | Komponente | Anbieter | Begründung |
 | :--- | :--- | :--- |
 | **Speech-to-Text (STT)** | Google Cloud Speech-to-Text | Bietet eine extrem schnelle, latenzarme Streaming-API, die Audio in kurzen Segmenten (z.B. 5-Sekunden-Chunks) verarbeitet, während Sie sprechen. Dies ist entscheidend für das flüssige Diktat in Echtzeit. Die Konkurrenz (wie OpenAI Whisper API) ist typischerweise auf die Auswertung kompletter Audiodateien nach Beendigung des Diktats ausgelegt und daher für Echtzeit-Anwendungen zu langsam. |
-| **Text-Strukturierung (LLM)** | OpenAI GPT-4o | Wird für die komplexe, regelbasierte Nachbearbeitung verwendet. GPT-4o ist führend bei der Einhaltung langer Anweisungsketten (`radiology_prompt.txt`) und der fehlerfreien Konvertierung von Roh-Diktat in den gewünschten, strukturierten Befund (Markdown-Format mit Korrekturen und Hervorhebungen). |
+| **Text-Strukturierung (LLM)** | OpenAI GPT-4o | Wird für die regelbasierte Nachbearbeitung verwendet. GPT-4o ist preiswert bei der Einhaltung langer Anweisungsketten (`radiology_prompt.txt`) und der fehlerfreien Konvertierung von Roh-Diktat in den gewünschten, strukturierten Befund (Markdown-Format mit Korrekturen und Hervorhebungen). |
 
 ---
 
