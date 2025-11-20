@@ -110,6 +110,7 @@ Die fertige Datei finden Sie anschließend im Unterordner dist/.
 🤓Linux: RaKScribe (ohne Endung)
 
 Damit sie startet, müssen sich folgende Dateien im selben Ordner befinden:
+
 config.ini
 
 radiology_prompt.txt
