@@ -15,7 +15,7 @@ RaKScribe nutzt eine hybride Cloud-Lösung, um die jeweiligen Stärken der führ
 
 ---
 
-### 👉 [DIE DETAILLIERTE INSTALLATIONSANLEITUNG BEFINDET SICH HIER (INSTALL.MD)](INSTALL.md)
+### 👉 [DIE DETAILLIERTE INSTALLATIONSANLEITUNG BEFINDET SICH HIER (INSTALL.MD)](install.md)
 
 ---
 
