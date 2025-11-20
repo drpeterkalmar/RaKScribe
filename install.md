@@ -30,7 +30,7 @@ Die Nutzung erfordert die Einrichtung von kostenpflichtigen Cloud-Diensten.
     cd C:\Pfad\zu\RaKScribe
 
 ### A. Pakete installieren
-Installieren Sie alle notwendigen Python-Bibliotheken in einem Schritt (scipy ist nicht mehr notwendig):
+Installieren Sie alle notwendigen Python-Bibliotheken in einem Schritt:
 
     pip install -r requirements.txt
 
@@ -54,7 +54,7 @@ Damit die App funktioniert, müssen der OpenAI-Schlüssel und die Google-Cloud-D
 
     [API_KEYS]
     OPENAI_API_KEY = sk-proj-IHR-SCHLÜSSEL-HIER
-    GOOGLE_JSON_FILENAME = google_service_account.json
+    GOOGLE_JSON_FILENAME = 1234-IHRE-DATE-HIER.json
 
 ### B. Google JSON-Schlüssel hinterlegen
 Legen Sie die von Google heruntergeladene `.json`-Datei (Service Account Key) direkt in denselben Ordner wie die `RaKScribe.py`. Achten Sie darauf, dass der Dateiname exakt mit dem Eintrag in der `config.ini` übereinstimmt.
