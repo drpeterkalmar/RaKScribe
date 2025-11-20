@@ -94,13 +94,13 @@ Starten Sie die App über die Kommandozeile:
 
 ## 5. Optional: Als ausführbare Datei kompilieren: 
 
-Bei Bedarf kann das Python-Skript in eine eigenständige `.exe`-Datei umgewandelt werden. Dies erfordert das Paket `pyinstaller`.
+Bei Bedarf kann das Python-Skript in eine ausführbare Datei umgewandelt werden. Dies erfordert das Paket `pyinstaller`.
 
 **Befehl für die Erstellung:**
 
     pyinstaller --noconsole --onefile --clean --name RaKScribe RaKScribe.py 
 
-Wichtig für die Nutzung: Die fertige Datei finden Sie anschließend im Ordner dist/. 
+Wichtig für die Nutzung: Die fertige Datei finden Sie anschließend im Unterordner dist/. 
 
 Windows: RaKScribe.exe
 
