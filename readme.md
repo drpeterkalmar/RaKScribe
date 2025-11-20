@@ -22,7 +22,7 @@ RaKScribe nutzt eine hybride Cloud-Lösung, um die jeweiligen Stärken der führ
 ## Grobes Vorgehen
 
 ### ⚙️ Voraussetzungen und API-Zugriff
-* **Python 3.10** oder neuer. Verwendet wurde 3.14
+* **Python 3.10** oder neuer. 
 * **OpenAI:** API-Schlüssel (für das Modell `gpt-4o`)
 * **Google Cloud:** JSON-Datei mit aktivierter "Cloud Speech-to-Text API"
 
