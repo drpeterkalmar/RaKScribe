@@ -21,6 +21,8 @@ Die Nutzung erfordert die Einrichtung von kostenpflichtigen Cloud-Diensten.
 | **OpenAI** | API-Schlüssel (für Modell `gpt-4o`) | Das Guthaben (Credits) muss ausreichend sein, um das Modell aufrufen zu können. |
 | **Google Cloud** | Dienstkonto mit aktivierter "Cloud Speech-to-Text API" | Der Schlüssel (JSON-Datei) muss volle Rechte für die STT-API besitzen. |
 
+Ihre APIs finden Sie unter https://platform.openai.com/api-keys bzw. https://console.cloud.google.com/apis/
+
 ---
 
 ## 2. Installation der Abhängigkeiten 📦
