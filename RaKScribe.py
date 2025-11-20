@@ -148,13 +148,13 @@ GOOGLE_CONFIG = speech.RecognitionConfig(
     encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
     sample_rate_hertz=16000, 
     language_code="de-DE",
-    model="default",      # KEIN 'medical_dictation' für Deutsch (s. Anmerkung)
+    model="latest_long",      # KEIN 'medical_dictation' für Deutsch (s. Anmerkung)
     use_enhanced=True,
     # Hinzufügen der erweiterten Liste mit hohem Prioritäts-Boost
     speech_contexts=[
         speech.SpeechContext(
             phrases=MEDICAL_PHRASES,
-            boost=15.0  # Erhöht die Gewichtung der medizinischen Begriffe (max. 20)
+            boost=10.0  # 15 erzwingt mehr Worterkennung wenn unverständlich, aber erhöht die Gewichtung der medizinischen Begriffe (max. 20)
         )
     ]
 )
