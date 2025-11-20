@@ -28,10 +28,11 @@ Ihre APIs finden Sie unter https://platform.openai.com/api-keys bzw. https://con
 ## 2. Installation der Abhängigkeiten 📦
 
 Öffnen Sie die PowerShell oder den Terminal (macOS/Linux) und navigieren Sie in das Hauptverzeichnis des Projekts:
-WINDOWS:
+
+🪟WINDOWS:
 
     cd C:\Pfad\zu\RaKScribe
-LINUX/MACOS:
+🐧LINUX oder 🍏MACOS:
 
     cd ~/RaKScribe
 
@@ -102,11 +103,11 @@ Bei Bedarf kann das Python-Skript in eine ausführbare Datei umgewandelt werden.
 
 Wichtig für die Nutzung: Die fertige Datei finden Sie anschließend im Unterordner dist/. 
 
-Windows: RaKScribe.exe
+🟦Windows: RaKScribe.exe
 
-macOS: RaKScribe.app (oder Unix-Executable)
+💸macOS: RaKScribe.app (oder Unix-Executable)
 
-Linux: RaKScribe (ohne Endung)
+🤓Linux: RaKScribe (ohne Endung)
 
 Damit sie startet, müssen folgende Dateien in denselben Ordner kopiert werden:
 
