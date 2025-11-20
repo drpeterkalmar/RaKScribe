@@ -37,5 +37,4 @@ API-Schlüssel und die Google JSON-Datei im Projektordner hinterlegen.
 
 ### 🚀 3. Starten
 Spracherkennung mit **F10** starten und stoppen.  
-Der strukturierte Befund wird automatisch in die Zwischenablage kopiert und (optional) direkt in das offene Textfenster eingefügt.
-*(Bitte Formatvorlagen Ü1, Ü2 und Fließtext in Word vorformatieren)*
+Falls ein Textfenster offen ist, wird der fertige Befund sofort WORD/HTML-formatiert eingefügt.
