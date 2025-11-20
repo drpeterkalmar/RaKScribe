@@ -14,9 +14,11 @@ Text-Strukturierung (LLM)	OpenAI GPT-4o	Wird für die komplexe, regelbasierte Na
 Grobes Vorgehen:
 
 ⚙️ Voraussetzungen und API-Zugriff
+
 Python 3.10 oder neuer 
-OpenAI	API-Schlüssel (für das Modell gpt-4o)	
-Google Cloud JSON Datei mit aktivierter "Cloud Speech-to-Text API"	
+
+OpenAI: API-Schlüssel (für das Modell gpt-4o)	
+Google Cloud: JSON Datei mit aktivierter "Cloud Speech-to-Text API"	
 
 🇩🇪 Sprachhinweis: Das RaKScribe-Projekt ist in seiner aktuellen Version vollständig auf die deutsche Sprache fixiert. 
 Dies betrifft sowohl die Spracherkennung (language_code="de-DE" in Google Cloud STT) als auch die gesamte Befundstrukturierung durch GPT-4o (radiology_prompt.txt). 
