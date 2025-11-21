@@ -81,7 +81,7 @@ Starten Sie die App über die Kommandozeile:
 * Die KI-Anweisungen (Terminologie-Regeln, Abkürzungen, Normalbefunde) werden aus der Datei `radiology_prompt.txt` geladen.
 * **WICHTIG:** Passen Sie die Regeln in dieser Datei an Ihre lokalen Befundungsgewohnheiten an. Diese Datei ist das Herzstück der Strukturierung!
 * Sie können den Prompt auch im laufenden Programmfenster ändern, er wird hier allerdings nicht gespeichert!
-* Alternative Promptfiles wurden laufend hinzugefügt, zB radiology_prompt.txt.DIN - einfach umbenennen in radiology_prompt.txt
+* Alternative Promptfiles wurden hinzugefügt, zB radiology_prompt.txt.DIN - einfach umbenennen in radiology_prompt.txt
 
 ### C. Diktat testen
 1.  Drücken Sie **F10** oder den Button "Diktat Start / Stopp".
