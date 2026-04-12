@@ -1,39 +1,46 @@
-# 🚀 RaKScribe
-Willkommen bei **RaKScribe**, dem hybriden Diktier-Tool für strukturierte radiologische Befunde.
+# 🚀 RaKScribe 2.0 (Offline)
 
-RaKScribe kombiniert die Geschwindigkeit der Spracherkennung des Google Cloud Streamings mit der relativ preiswerten Strukturierungsintelligenz von OpenAI GPT-4o. 
-> **Hinweis:** Für die Nutzung fallen API-Kosten an (ca. 1,3 Cent pro Befundminute, Stand Nov. 2025).
+Willkommen bei **RaKScribe**, dem spezialisierten Diktier-Tool für strukturierte radiologische Befunde – jetzt **100% Offline**, datenschutzkonform und kostenlos.
 
-## 💡 Konzept und Begründung der Hybrid-Architektur
+RaKScribe nutzt modernste lokale KI-Modelle, um gesprochenes Wort direkt auf Ihrem Rechner in hochpräzise medizinische Berichte zu verwandeln. 
 
-RaKScribe nutzt eine hybride Cloud-Lösung, um die jeweiligen Stärken der führenden KI-Anbieter optimal zu kombinieren:
+> [!TIP]
+> **Vorteil:** Es verlassen keine Patientendaten Ihren Rechner (DSGVO-konform). Es entstehen keine API-Kosten.
 
-| Komponente | Anbieter | Begründung |
+## 💡 Architektur: 100% Lokale Intelligenz
+
+RaKScribe ersetzt Cloud-Dienste durch leistungsstarke lokale Worker-Modelle:
+
+| Komponente | Engine | Begründung |
 | :--- | :--- | :--- |
-| **Speech-to-Text (STT)** | Google Cloud Speech-to-Text | Bietet eine extrem schnelle, latenzarme Streaming-API, die Audio in kurzen Segmenten (z.B. 5-Sekunden-Chunks) verarbeitet, während Sie sprechen. Dies ist entscheidend für das flüssige Diktat in Echtzeit. Die Konkurrenz (wie OpenAI Whisper API) ist typischerweise auf die Auswertung kompletter Audiodateien nach Beendigung des Diktats ausgelegt und daher für Echtzeit-Anwendungen zu langsam. |
-| **Text-Strukturierung (LLM)** | OpenAI GPT-4o | Wird für die regelbasierte Nachbearbeitung verwendet. GPT-4o ist preiswert bei der Einhaltung langer Anweisungsketten (`radiology_prompt.txt`) und der fehlerfreien Konvertierung von Roh-Diktat in den gewünschten, strukturierten Befund (Markdown-Format mit Korrekturen und Hervorhebungen). |
+| **Spracherkennung (STT)** | **Faster-Whisper** (`large-v3-turbo`) | Nutzt die GPU zur Echtzeit-Transkription. Durch Chunk-basiertes Pseudo-Streaming sehen Sie Ihren Text bereits während des Sprechens – ganz ohne Google Cloud. |
+| **Strukturierung (LLM)** | **Gemma 4** (`gemma4:e4b`) | Ein hochmodernes lokales Modell von Google DeepMind, das via Ollama betrieben wird. Es korrigiert Diktatfehler und formatiert den Befund basierend auf Ihren Vorlagen (`radiology_prompt.txt`). |
 
 ---
 
-### 👉 [DIE DETAILLIERTE INSTALLATIONSANLEITUNG BEFINDET SICH HIER (INSTALL.MD)](install.md)
+### 👉 [DETAILLIERTE INSTALLATIONSANLEITUNG (INSTALL.MD)](install.md)
 
 ---
 
-## Grobes Vorgehen
+## Kernfunktionen
 
-### ⚙️ Voraussetzungen und API-Zugriff
-* **Python 3.10** oder neuer. 
-* **OpenAI:** API-Schlüssel (für das Modell `gpt-4o`)
-* **Google Cloud:** JSON-Datei mit aktivierter "Cloud Speech-to-Text API"
+### ⚙️ Voraussetzungen
+* **Python 3.12** oder neuer. 
+* **NVIDIA GPU:** Empfohlen (mind. 8GB VRAM für flüssigen Betrieb).
+* **Ollama:** Der lokale Backend-Server für das Sprachmodell.
 
-> **🇩🇪 Sprachhinweis:** > Das RaKScribe-Projekt ist in seiner aktuellen Version vollständig auf die deutsche Sprache fixiert. Dies betrifft sowohl die Spracherkennung (`language_code="de-DE"` in Google Cloud STT) als auch die gesamte Befundstrukturierung durch GPT-4o (`radiology_prompt.txt`). Eine Nutzung in anderen Sprachen erfordert Anpassungen im Code und im Prompt-Template.
+### 🔒 Sicherheit & Datenschutz
+* Keine Übertragung von Audio- oder Textdaten an externe Server (OpenAI, Google).
+* Vollständige Kontrolle über die verwendeten Modelle und Daten.
+* Ideal für sensible klinische Umgebungen und Praxen.
 
-### 📦 1. Installation der Abhängigkeiten
-Pakete installieren aus `requirements.txt` und Audio-Treiber testen.
+### 🚀 Schneller Workflow
+1. **F10** drücken → Diktat startet (Live-Anzeige der Chunks).
+2. **F10** erneut drücken → Modell strukturiert den Befund innerhalb von Sekunden.
+3. Der fertige Befund wird automatisch in Word/RIS/PACS eingefügt (via Clipboard).
 
-### 🔐 2. Authentifizierung einrichten
-OPENAI-API-Schlüssel und die Google JSON-Datei im Projektordner hinterlegen.
+## Anpassung
+Die medizinische Intelligenz steckt in der `radiology_prompt.txt`. Hier können Sie Ihre persönlichen Normalbefunde, Abkürzungen und Formatierungswünsche hinterlegen.
 
-### 🚀 3. Starten
-Spracherkennung mit **F10** starten und stoppen.  
-Falls ein Textfenster offen ist, wird der fertige Befund sofort im WORD/HTML-formatiert eingefügt.
+---
+*(c) 2025-2026 Dr. Peter Kalmar - Erstellt für die lokale radiologische Befundung.*

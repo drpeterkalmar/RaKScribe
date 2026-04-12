@@ -1,121 +1,85 @@
-# ⚙️ Installations- und Einrichtungsanleitung
+# ⚙️ Installations- und Einrichtungsanleitung (Offline-Version)
 
-> **🇩🇪 Wichtiger Sprachhinweis:**
-> Das RaKScribe-Projekt ist in seiner aktuellen Version **vollständig auf die deutsche Sprache fixiert**.
-> Dies betrifft sowohl die Spracherkennung (`language_code="de-DE"` in Google Cloud STT) als auch die gesamte Befundstrukturierung durch GPT-4o (`radiology_prompt.txt`). Eine Nutzung in anderen Sprachen erfordert Anpassungen im Code und im Prompt-Template.
+RaKScribe 2.0 läuft vollständig lokal auf Ihrem Rechner. Es sind keine Cloud-Abonnements oder API-Keys mehr erforderlich.
 
 ---
 
-## 1. Voraussetzungen und API-Zugriff
+## 1. Systemvoraussetzungen 💻
 
-Die Nutzung erfordert die Einrichtung von kostenpflichtigen Cloud-Diensten.
+Um STT (Spracherkennung) und LLM (Strukturierung) gleichzeitig flüssig zu betreiben, wird folgende Hardware empfohlen:
 
-### A. Python-Umgebung
-* **Python 3.10 oder neuer** muss installiert sein. (Entwickelt und getestet mit Python 3.14).
-* **WICHTIG:** Die Shell/CMD muss die Python-Befehle (`python`, `pip`) erkennen können (zu PATH hinzufügen).
-
-### B. Cloud-API-Voraussetzungen
-
-| Dienst | Notwendiger Zugang | Bemerkung |
-| :--- | :--- | :--- |
-| **OpenAI** | API-Schlüssel (für Modell `gpt-4o`) | Das Guthaben (Credits) muss ausreichend sein, um das Modell aufrufen zu können. |
-| **Google Cloud** | Dienstkonto mit aktivierter "Cloud Speech-to-Text API" | Der Schlüssel (JSON-Datei) muss volle Rechte für die STT-API besitzen. |
-
-Ihre APIs finden Sie unter https://platform.openai.com/api-keys bzw. https://console.cloud.google.com/apis/
+* **GPU:** NVIDIA Grafikkarte mit mind. **8 GB VRAM** (z.B. RTX 3070 Ti, 4060 oder besser).
+* **RAM:** Mind. 16 GB Arbeitsspeicher.
+* **Betriebssystem:** Windows 10/11 (bevorzugt).
+* **Python:** Version 3.12 oder neuer.
 
 ---
 
-## 2. Installation der Abhängigkeiten 📦
+## 2. Software-Komponenten installieren 📦
 
-Öffnen Sie die PowerShell oder den Terminal (macOS/Linux) und navigieren Sie in das Hauptverzeichnis des Projekts:
+### A. Ollama (Das LLM-Backend)
+1. Laden Sie Ollama von [ollama.com](https://ollama.com) herunter und installieren Sie es.
+2. Öffnen Sie ein Terminal (PowerShell) und laden Sie das benötigte Sprachmodell:
+   ```powershell
+   ollama pull gemma4:e4b
+   ```
 
-🪟WINDOWS:
+### B. Python-Abhängigkeiten
+Navigieren Sie in den Projektordner und installieren Sie die Bibliotheken:
+```powershell
+pip install -r requirements.txt
+```
 
-    cd C:\Pfad\zu\RaKScribe
-🐧LINUX oder 🍏MACOS:
-
-    cd ~/RaKScribe
-
-### A. Pakete installieren
-Installieren Sie alle notwendigen Python-Bibliotheken in einem Schritt:
-
-    pip install -r requirements.txt
-
-### B. Audio-Treiber testen
-Stellen Sie sicher, dass das Mikrofon erkannt wird und Treiber (PortAudio) vorhanden sind:
-
-    python -m sounddevice
-
-*(Sollte eine Liste der verfügbaren Audio-Geräte ausgeben).*
+### C. Audio-Treiber testen
+Stellen Sie sicher, dass Ihr Mikrofon erkannt wird:
+```powershell
+python -m sounddevice
+```
 
 ---
 
-## 3. Authentifizierung einrichten 🔐
+## 3. Konfiguration einrichten 🛠️
 
-Damit die App funktioniert, müssen der OpenAI-Schlüssel und die Google-Cloud-Datei hinterlegt werden.
+RaKScribe nutzt eine `config.ini` Datei für alle Einstellungen.
 
-### A. Konfigurationsdatei erstellen
-1.  Kopieren Sie die Musterdatei `config.ini.example` (falls vorhanden) oder erstellen Sie eine neue Datei.
-2.  Benennen Sie die Datei um in **`config.ini`**.
-3.  Öffnen Sie die Datei und fügen Sie folgenden Inhalt ein (ersetzen Sie die Platzhalter):
+1. Erstellen Sie eine Datei namens **`config.ini`** im Hauptverzeichnis (falls nicht vorhanden).
+2. Fügen Sie folgenden Inhalt ein:
 
-    [API_KEYS]
-    
-    OPENAI_API_KEY = sk-proj-IHR-SCHLÜSSEL-HIER
-    
-    GOOGLE_JSON_FILENAME = 1234-IHRE-DATE-HIER.json
-
-### B. Google JSON-Schlüssel hinterlegen
-Legen Sie die von Google heruntergeladene `.json`-Datei (Service Account Key) direkt in denselben Ordner wie die `RaKScribe.py`. Achten Sie darauf, dass der Dateiname exakt mit dem Eintrag in der `config.ini` übereinstimmt.
+```ini
+[SETTINGS]
+OLLAMA_URL = http://localhost:11434
+LLM_MODEL = gemma4:e4b
+WHISPER_MODEL = large-v3-turbo
+WHISPER_COMPUTE_TYPE = int8
+CHUNK_DURATION = 7
+```
 
 ---
 
-## 4. Erster Start und Optimierung 🚀
+## 4. Erster Start 🚀
 
-### A. Anwendung starten
-Starten Sie die App über die Kommandozeile:
-
-    python RaKScribe.py
-
-### B. Prompt-Vorlage anpassen
-* Die KI-Anweisungen (Terminologie-Regeln, Abkürzungen, Normalbefunde) werden aus der Datei `radiology_prompt.txt` geladen.
-* **WICHTIG:** Passen Sie die Regeln in dieser Datei an Ihre lokalen Befundungsgewohnheiten an. Diese Datei ist das Herzstück der Strukturierung!
-* Sie können den Prompt auch im laufenden Programm ändern, er wird hier allerdings nicht gespeichert!
-
-### C. Diktat testen
-1.  Drücken Sie **F10** oder den Button "Diktat Start / Stopp".
-2.  Sprechen Sie in das Mikrofon (der Pegel-Balken muss ausschlagen).
-3.  Drücken Sie erneut **F10** zum Stoppen.
-4.  **Automatischer Export:** Nach kurzer Verarbeitung durch GPT-4o wird der strukturierte Befund in die Zwischenablage kopiert und automatisch eingefügt.
-
-> **💡 Tipp für Word:**
-> Damit der Befund perfekt aussieht, sollten in Ihrem Word-Dokument die Formatvorlagen **"Überschrift 1"**, **"Überschrift 2"** und **"Standard"** (Fließtext) sauber vorformatiert sein. RaKScribe nutzt HTML-Formatierung, die diese Stile anspricht.
+1. Starten Sie die Anwendung:
+   ```powershell
+   python RaKScribe.py
+   ```
+2. **Hinweis:** Beim allerersten Start lädt die App das Whisper-Modell (~1.5 GB) automatisch herunter. Dies kann je nach Internetgeschwindigkeit einige Minuten dauern. Danach startet die App in Sekunden.
+3. Passen Sie die `radiology_prompt.txt` an Ihre gewohnten Befunde an.
 
 ---
 
-## 5. Optional: Als ausführbare Datei kompilieren: 
+## 5. Bedienung und Workflow 🎤
 
-Bei Bedarf kann das Python-Skript in eine ausführbare Datei umgewandelt werden. Dies erfordert das Paket `pyinstaller`.
+1. **Starten:** Drücken Sie **F10**. Sprechen Sie Ihren Befund. Der Pegel-Balken schlägt aus und das Transkript wird in Chunks (Paketen) live angezeigt.
+2. **Stoppen:** Drücken Sie erneut **F10**. Die KI strukturiert den Text.
+3. **Einfügen:** Der fertige Befund wird automatisch in die Zwischenablage kopiert und im aktiven Fenster (z.B. Word oder RIS-Textfeld) eingefügt.
 
-**Befehl für die Erstellung:**
+---
 
-    pyinstaller --noconsole --onefile --clean --name RaKScribe RaKScribe.py 
+## Fehlerbehebung (Troubleshooting)
 
-Die fertige Datei finden Sie anschließend im Unterordner dist/. 
+* **Ollama nicht gefunden:** Stellen Sie sicher, dass das Ollama-Icon in der Taskleiste sichtbar ist.
+* **GPU-Fehler (CUDA):** Wenn keine NVIDIA-Karte vorhanden ist, wechselt die App automatisch auf den CPU-Modus (deutlich langsamer). Installieren Sie ggf. die neuesten NVIDIA-Treiber.
+* **Kein Pegelausschlag:** Prüfen Sie in den Windows-Soundeinstellungen, ob das richtige Mikrofon als Standardgerät ausgewählt ist.
 
-🟦Windows: RaKScribe.exe
-
-💸macOS: RaKScribe.app (oder Unix-Executable)
-
-🤓Linux: RaKScribe (ohne Endung)
-
-Damit sie startet, müssen folgende Dateien in denselben Ordner kopiert werden:
-
-config.ini
-
-radiology_prompt.txt
-
-Die Google-JSON-Datei
-
-
-
+---
+*(c) 2026 RaKScribe Team - Lokale radiologische Dokumentation.*
