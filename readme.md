@@ -4,6 +4,8 @@
 
 RaKScribe26 ist die Weiterentwicklung des offline-basierten radiologischen Befundungsassistenten. Es kombiniert die unglaubliche Geschwindigkeit und Qualität moderner Online-KI-Modelle mit dem bewährten lokalen Workflow, um Diktate in Sekundenschnelle in strukturierte Berichte (mit *Befund* und *Beurteilung*) zu übersetzen und direkt in Ihr RIS oder Word einzufügen.
 
+> **Neu in v2.6.0:** Klarer Fokus auf **modalitätsspezifische Befundvorlagen** – RaKScribe26 erkennt automatisch die Bildgebungsmodalität und wählt die passende Vorlage. Unterstützte Modalitäten: Röntgen (Skelett, Thorax, HWS/BWS/LWS, Schädel, Fernröntgen), Sonographie (Abdomen, Weichteile, Gelenke, Schilddrüse, Gefäße), Mammographie, Durchleuchtung, DEXA-Knochendichtemessung, Zahnröntgen (OPG) und Digitale Volumentomographie (DVT).
+
 ---
 
 ## 💡 Architektur: Hybrid Online & Offline
@@ -39,11 +41,34 @@ Für den Online-Modus fallen bei Google folgende minimale Gebühren an:
 
 ## ⭐ Hauptmerkmale
 
+* **🏥 Modalitätsspezifische Befundvorlagen:** RaKScribe26 erkennt automatisch die Bildgebungsmodalität des diktierten Befunds und wählt die passende strukturierte Vorlage. Jede Modalität hat eigene, klinisch präzise Templates – keine Verwechslung mehr zwischen Röntgen, Sonographie und Nervenschall.
 * **⚡ Sub-Sekunden-Latenz:** Befunde werden online via Gemini Flash in unter 2 Sekunden fertig strukturiert und formatiert zurückgeliefert.
 * **🔑 Zero-Configuration:** Keine manuelle API-Key-Eingabe nötig! Die Anwendung verwendet automatisch Ihre Google Speech-to-Text-Schlüsseldatei (`rakscribe-0ff1ffd128a1.json`) zur sicheren Authentifizierung bei Gemini.
 * **📋 Auto-Paste & Hotkey (F10):** Ein einziger Tastendruck auf **F10** startet und stoppt das Diktat. Nach Beendigung wird der fertige Befund automatisch in die Zwischenablage kopiert und per `Ctrl+V` direkt in Ihr aktives RIS, Word oder KIS eingefügt.
+* **🔄 Reset-Hotkey (F9):** Schnelles Zurücksetzen aller Felder mit **F9** – ideal wenn ein Diktat falsch gestartet wurde oder die Vorlage neu gewählt werden soll.
 * **🩺 Medizinisches Vokabular:** Ein integrierter Wortschatz-Boost sorgt dafür, dass komplexe radiologische Fachbegriffe (z. B. *Spondylarthrose*, *Rotatorenmanschettenruptur*, *Rhizarthrose*) fehlerfrei erkannt werden.
 * **🪵 Diagnose-Protokollierung:** Automatisches Schreiben von Log-Ausgaben und Mikrofon-Pegeldaten (RMS) in eine lokale `rakscribe.log`, um Treiber- oder Datenschutzprobleme auf einzelnen PCs sofort aufzuspüren.
+
+---
+
+## 🏥 Unterstützte Modalitäten & Befundvorlagen
+
+Jede Modalität verfügt über eigene, klinisch präzise Befundvorlagen. Die automatische Erkennung erfolgt auf Basis von Schlüsselwörtern im Diktat:
+
+| Modalität | Beispiele / Templates |
+| :--- | :--- |
+| **Röntgen – Skelett & Gelenke** | Hand, Handgelenk, Finger, Daumen, Schulter, Ellbogen, Knie, Sprunggelenk, Fuß, Zehengelenke, Becken, Hüfte |
+| **Röntgen – Wirbelsäule** | HWS, BWS, LWS (je ap + seitlich) |
+| **Röntgen – Thorax** | Thorax pa, Thorax ap liegend |
+| **Röntgen – Schädel** | Schädel standard, Schädelfernröntgen (lateral/pa, unauffällig) |
+| **Sonographie – Abdomen** | Oberbauch, Ganzes Abdomen, Nieren |
+| **Sonographie – Weichteile** | Weichteilsonographie, Nervenschall (Leitbahnen, Gelenke sonographisch) |
+| **Sonographie – Schilddrüse** | Schilddrüse, Halsweichteile |
+| **Mammographie** | Standard-Mammographie bilateral, Befund & BIRADS-Kategorie |
+| **Durchleuchtung** | Ösophagus, Magen, Darm, Kontrastmittel-Untersuchungen |
+| **DEXA** | Knochendichtemessung LWS + Femur, T-Score, Z-Score, Osteoporose-Einschätzung |
+| **Zahnröntgen (OPG)** | Orthopantomogramm, Einzelzahnaufnahmen |
+| **DVT** | Digitale Volumentomographie Oberkiefer, Unterkiefer |
 
 ---
 
