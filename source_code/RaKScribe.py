@@ -362,6 +362,37 @@ def detect_template(text):
         # Sonographie Allgemein
         return "sonografie_allgemein"
 
+    # 1. DVT / Digitale Volumentomographie / Zahnröntgen / OPG / Zahnstatus
+    if "dvt" in text_lower or "volumentomographie" in text_lower:
+        if "oberkiefer" in text_lower or "ok" in text_lower:
+            return "dvt_oberkiefer"
+        if "unterkiefer" in text_lower or "uk" in text_lower:
+            return "dvt_unterkiefer"
+        return "dvt_oberkiefer"  # Default
+        
+    if any(x in text_lower for x in ["opg", "zahnröntgen", "zahnstatus", "orthopantomogramm"]):
+        return "orthopantomogramm_des_kiefer-_und_gesichtsschädels"
+        
+    # 2. DEXA / Knochendichtemessung / Osteodensitometrie
+    if any(x in text_lower for x in ["dexa", "knochendichte", "densitometrie", "odm"]):
+        return "knochendichtemessung_dexa"
+        
+    # 3. Mammographie
+    if "mammo" in text_lower:
+        return "mammographie_beidseits"
+
+    # 4. Durchleuchtungen (Fluoroscopy)
+    if "breischluck" in text_lower or "ösophagus" in text_lower or "schluckakt" in text_lower:
+        return "durchleuchtung:_ösophagus-breischluck"
+    if "mdp" in text_lower or "magen-darm" in text_lower or "magen" in text_lower:
+        return "durchleuchtung:_magen-darm-passage_mdp"
+    if "urogramm" in text_lower or "ivu" in text_lower or "ivp" in text_lower:
+        return "intravenöses_urogramm"
+    if "phlebographie" in text_lower or "phlebo" in text_lower:
+        return "beinphlebographie"
+    if "hsg" in text_lower or "hysterosalpingographie" in text_lower:
+        return "hysterosalpingographie"
+
     # Priorisiertes Mapping: spezifischere Begriffe zuerst prüfen
     mappings = [
         # MRT / CT (am spezifischsten)
@@ -658,7 +689,7 @@ class RaKScribeApp(ctk.CTk):
                                          command=self.toggle_recording)
         self.record_btn.pack(side="left")
 
-        self.reset_btn = ctk.CTkButton(ctrl_frame, text=" Zurücksetzen ",
+        self.reset_btn = ctk.CTkButton(ctrl_frame, text=" Zurücksetzen (F9) ",
                                         height=50,
                                         font=("Segoe UI", 14),
                                         fg_color="#2D314D",
@@ -1163,6 +1194,7 @@ class RaKScribeApp(ctk.CTk):
 
     def register_hotkey(self):
         keyboard.add_hotkey('f10', lambda: self.after(0, self.toggle_recording), suppress=True)
+        keyboard.add_hotkey('f9', lambda: self.after(0, self.reset_dictation), suppress=True)
 
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")
