@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  ScanLine, 
+  Aperture, 
   Mic, 
   MicOff, 
   Copy, 
@@ -878,7 +878,7 @@ export default function App() {
         <div className="login-card" style={{ zIndex: 1 }}>
           <div className="login-header">
             <div className="login-icon">
-              <ScanLine size={40} />
+              <Aperture size={40} />
             </div>
             <h1 className="login-title">RaKScribe26 Web</h1>
             <p className="login-subtitle">Radiologische Befundungssoftware im Browser</p>
@@ -942,7 +942,7 @@ export default function App() {
       <header className="app-header" style={{ zIndex: 1 }}>
         <div className="brand-section">
           <div className="brand-icon">
-            <ScanLine size={24} />
+            <Aperture size={24} />
           </div>
           <div className="brand-title-group">
             <div className="brand-name">
