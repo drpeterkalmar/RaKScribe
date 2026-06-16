@@ -11,8 +11,8 @@ ENV/
 .idea/
 
 # RaKScribe Secrets & Local Config (Legacy & Current)
-*.json
-!templates.json
+/*.json
+!/templates.json
 *.bat
 !start rakscribe.bat
 !source_code/build.bat
