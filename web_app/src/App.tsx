@@ -1567,75 +1567,9 @@ export default function App() {
         </section>
       </main>
 
-      {/* Footer Collapsible Prompt Editor */}
-      <footer style={{ padding: '16px 24px', borderTop: '1px solid var(--border-color)', zIndex: 1, backgroundColor: 'var(--bg-card)' }}>
-        <details style={{ color: 'var(--text-secondary)' }}>
-          <summary style={{ cursor: 'pointer', outline: 'none', fontSize: '13px', fontWeight: 600 }}>
-            ⚙️ System-Prompt ansehen & bearbeiten (Praxis-Standard)
-          </summary>
-          <div style={{ marginTop: '12px' }}>
-            <p style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '10px' }}>
-              Der System-Prompt steuert das Verhalten der KI. Platzhalter: <code>{'{roh_text}'}</code>, <code>{'{template_body}'}</code>, <code>{'{examples}'}</code>.
-            </p>
-            <textarea
-              value={systemPrompt}
-              onChange={e => {
-                setSystemPrompt(e.target.value);
-                localStorage.setItem('system_prompt', e.target.value);
-              }}
-              rows={8}
-              className="text-editor"
-              style={{ 
-                width: '100%', 
-                background: 'var(--bg-input)', 
-                color: '#fff', 
-                border: '1px solid var(--border-color)', 
-                borderRadius: '8px', 
-                padding: '12px', 
-                fontFamily: 'var(--mono-font)', 
-                fontSize: '12px', 
-                resize: 'vertical' 
-              }}
-            />
-            <button
-              onClick={() => {
-                const confirmReset = window.confirm('Prompt auf Praxis-Standard zurücksetzen? Alle eigenen Änderungen gehen verloren.');
-                if (confirmReset) {
-                  const resetPrompt = 
-                    `<role>Radiologie-Assistent der Praxis "Röntgen am Kai" – Dr. P. Kalmar / Dr. G. Riegler</role>\n` +
-                    `<instructions>\n` +
-                    `Du bist ein präziser radiologischer Befundungsassistent für die Praxis "Röntgen am Kai" in Graz. Deine Aufgabe ist es, das diktierte Stichwortprotokoll des Arztes in einen formalen, professionellen radiologischen Befund zu strukturieren, der sich EXAKT an den historischen Befundvorlagen der Praxis orientiert.\n\n` +
-                    `## STRIKTE FORMATREGELN:\n` +
-                    `1. Erstelle IMMER exakt zwei Hauptabschnitte: '## Befund' und '## Ergebnis'. Kein weiterer Text, keine Kommentare, keine Erklärungen außerhalb dieser Abschnitte.\n` +
-                    `2. Gib NUR den fertigen Befundtext aus – keine Einleitung, kein Schlusswort.\n\n` +
-                    `## ABSCHNITT "## Befund":\n` +
-                    `- Nutze das bereitgestellte Normalbefund-Template als genaue strukturelle Basis.\n` +
-                    `- Passe gezielt die Sätze an, bei denen das Diktat pathologische Befunde nennt.\n` +
-                    `- Behalte ALLE nicht genannten Regionen und Sätze des Templates UNVERÄNDERT.\n` +
-                    `- Übernimm Messwerte exakt aus dem Diktat.\n` +
-                    `- Schreibe im radiologischen Nominalstil.\n\n` +
-                    `## ABSCHNITT "## Ergebnis":\n` +
-                    `- Fasse alle diagnosewesentlichen Pathologien kurz und stichpunktartig zusammen.\n` +
-                    `- Beispiele: 'Intakte Hüft-TEP rechts.', 'Coxarthrose links.', 'STT-Arthrose beidseits.', 'Osteochondrosis pubis.', 'Beckenschiefstand nach links um 4 mm.'\n` +
-                    `</instructions>\n` +
-                    `<normalbefund_template>\n` +
-                    `{template_body}\n` +
-                    `</normalbefund_template>\n\n` +
-                    `{examples}\n\n` +
-                    `<diktat>\n` +
-                    `{roh_text}\n` +
-                    `</diktat>`;
-                  setSystemPrompt(resetPrompt);
-                  localStorage.setItem('system_prompt', resetPrompt);
-                }
-              }}
-              className="btn btn-secondary"
-              style={{ marginTop: '10px', fontSize: '12px', padding: '6px 14px', height: 'auto', minWidth: 'unset' }}
-            >
-              ↺ Auf Praxis-Standard zurücksetzen
-            </button>
-          </div>
-        </details>
+      {/* Footer */}
+      <footer style={{ padding: '12px 24px', borderTop: '1px solid var(--border-color)', zIndex: 1, textAlign: 'center', fontSize: '11px', color: 'var(--text-secondary)' }}>
+        <span>&copy; {new Date().getFullYear()} Praxis "Röntgen am Kai" &bull; RaKScribe26</span>
       </footer>
     </div>
   );
