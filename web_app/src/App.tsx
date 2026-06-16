@@ -664,6 +664,37 @@ export default function App() {
     setStatusText('Bereit');
   };
 
+  // Refs to avoid stale closures in global keyboard event listeners
+  const statusRef = useRef(status);
+  statusRef.current = status;
+  const startRecordingRef = useRef(startRecording);
+  startRecordingRef.current = startRecording;
+  const stopRecordingRef = useRef(stopRecording);
+  stopRecordingRef.current = stopRecording;
+  const handleResetRef = useRef(handleReset);
+  handleResetRef.current = handleReset;
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'F10') {
+        e.preventDefault();
+        if (statusRef.current === 'recording') {
+          stopRecordingRef.current();
+        } else if (statusRef.current === 'ready') {
+          startRecordingRef.current();
+        }
+      } else if (e.key === 'F9') {
+        e.preventDefault();
+        handleResetRef.current();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   // Render Login screen if not authenticated
   if (!isAuthenticated) {
     return (

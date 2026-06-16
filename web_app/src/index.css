@@ -479,12 +479,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
-  font-size: 14px;
+  gap: 10px;
+  padding: 14px 24px;
+  font-size: 15px;
   font-weight: 600;
   font-family: var(--sans-font);
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -498,6 +498,9 @@ body {
 
 .btn-primary {
   background-color: var(--accent-purple);
+  padding: 16px 36px;
+  font-size: 17px;
+  border-radius: 12px;
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -519,6 +522,9 @@ body {
 
 .btn-danger {
   background-color: var(--recording-red);
+  padding: 16px 36px;
+  font-size: 17px;
+  border-radius: 12px;
   box-shadow: 0 0 15px rgba(240, 68, 56, 0.2);
 }
 
