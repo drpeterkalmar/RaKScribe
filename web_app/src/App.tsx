@@ -339,6 +339,35 @@ export default function App() {
       }
     }
 
+    // ── Full-spine detection (expanded keywords) ──────────────────────────────
+    // Covers: "Wirbelsäulen ganz Aufnahme", "Ganzwirbelsäule", "Gesamtwirbelsäule",
+    //         "zerviko-thorako-lumbal", "cervico-thoracal-lumbal", "toracco lumbal", etc.
+    const hasCervical  = textLower.includes("hws") || textLower.includes("zervik")
+                      || textLower.includes("zerviko") || textLower.includes("cervik")
+                      || textLower.includes("cervico") || textLower.includes("halswirbel");
+    const hasThoracic  = textLower.includes("bws") || textLower.includes("thorakal")
+                      || textLower.includes("thorako") || textLower.includes("thoraco")
+                      || textLower.includes("toracco") || textLower.includes("brustwirbel");
+    const hasLumbar    = textLower.includes("lws") || textLower.includes("lumbal")
+                      || textLower.includes("lendenwirbel");
+    const isFullSpineExam = textLower.includes("ganzaufnahme")
+                      || textLower.includes("gesamtwirbel")
+                      || textLower.includes("ganzwirbel")
+                      || (textLower.includes("ganz") && textLower.includes("wirbels"))
+                      || (textLower.includes("gesamt") && textLower.includes("wirbel"))
+                      || (textLower.includes("komplett") && textLower.includes("wirbel"));
+
+    if (isFullSpineExam || (hasCervical && hasThoracic && hasLumbar)) {
+      return "wirbelsäule_gesamt";
+    }
+    if (hasCervical && hasLumbar) {
+      return "hws_und_lws";
+    }
+    if (hasCervical && hasThoracic) {
+      return "wirbelsäule_gesamt";
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     if (textLower.includes("hws") && textLower.includes("lws")) {
       if (textLower.includes("bws")) {
         return "wirbelsäule_gesamt";
