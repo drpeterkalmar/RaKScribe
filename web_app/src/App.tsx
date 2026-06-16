@@ -589,64 +589,58 @@ export default function App() {
   // Render Login screen if not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="flex-grow flex items-center justify-center p-6 animate-fade-in" style={{ minHeight: '100vh', background: 'radial-gradient(circle at 50% 50%, #161A34 0%, #0B0D17 100%)' }}>
-        <div className="glass-panel w-full max-w-md p-8 rounded-2xl border" style={{ borderColor: 'var(--border-color)' }}>
-          <div className="flex flex-col items-center mb-8">
-            <div className="p-3 rounded-xl mb-4 text-purple-400" style={{ backgroundColor: 'rgba(140, 82, 255, 0.15)', color: 'var(--accent-purple)' }}>
+      <div className="login-container">
+        <div className="login-card">
+          <div className="login-header">
+            <div className="login-icon">
               <Stethoscope size={40} />
             </div>
-            <h1 className="text-3xl font-bold tracking-tight text-white mb-1">RaKScribe26 Web</h1>
-            <p className="text-sm text-gray-400 text-center">Radiologische Befundungssoftware im Browser</p>
+            <h1 className="login-title">RaKScribe26 Web</h1>
+            <p className="login-subtitle">Radiologische Befundungssoftware im Browser</p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Benutzername (Praxis-Login)</label>
+          <form onSubmit={handleLogin}>
+            <div className="form-group">
+              <label className="form-label">Benutzername (Praxis-Login)</label>
               <input 
                 type="text" 
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 placeholder="z.B. dr.kalmar"
-                className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-purple-600 outline-none transition-all text-white font-medium" 
-                style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-color)' }}
+                className="form-input"
                 required
               />
             </div>
 
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Passwort</label>
-              <div className="relative">
+            <div className="form-group">
+              <label className="form-label">Passwort</label>
+              <div className="password-wrapper">
                 <input 
                   type="password" 
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="Passwort eingeben"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-purple-600 outline-none transition-all text-white font-medium"
-                  style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-color)' }}
+                  className="form-input"
                   required
                 />
-                <Lock className="absolute right-3 top-3.5 text-gray-500" size={18} />
+                <Lock className="password-icon" size={18} />
               </div>
             </div>
 
             {authError && (
-              <div className="p-3 bg-red-900 bg-opacity-30 border border-red-500 rounded-lg text-red-300 text-sm">
+              <div className="login-error">
                 {authError}
               </div>
             )}
 
-            <button 
-              type="submit" 
-              className="w-full py-3 px-4 rounded-lg font-bold text-white transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-              style={{ backgroundColor: 'var(--accent-purple)' }}
-            >
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '48px', marginTop: '10px' }}>
               Anmelden <ArrowRight size={18} />
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
+          <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #1E2235', fontSize: '12px', color: 'var(--text-secondary)' }}>
             Benötigen Sie Hilfe? Kontaktieren Sie die Praxis-IT. <br />
-            <span className="italic mt-1 block">(Hinweis für Testzwecke: Beliebiger Username + Passwort: "rakscribe")</span>
+            <span style={{ fontStyle: 'italic', display: 'block', marginTop: '4px' }}>(Passwort für Testzwecke: "rakscribe")</span>
           </div>
         </div>
       </div>
@@ -657,37 +651,34 @@ export default function App() {
   return (
     <div className="flex-grow flex flex-col" style={{ minHeight: '100vh', backgroundColor: 'var(--bg-main)' }}>
       {/* Header bar */}
-      <header className="px-6 py-4 flex items-center justify-between border-b" style={{ borderColor: 'var(--border-color)', backgroundColor: 'rgba(11, 13, 23, 0.9)' }}>
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg text-purple-400" style={{ backgroundColor: 'rgba(140, 82, 255, 0.15)', color: 'var(--accent-purple)' }}>
+      <header className="app-header">
+        <div className="brand-section">
+          <div className="brand-icon">
             <Stethoscope size={24} />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-white tracking-wide text-lg">RaKScribe26</span>
-              <span className="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-semibold border border-gray-700">Web Beta</span>
+          <div className="brand-title-group">
+            <div className="brand-name">
+              <span>RaKScribe26</span>
+              <span className="brand-badge">Web Beta</span>
             </div>
-            <span className="text-xs text-gray-400 font-medium">Befundungsassistent</span>
+            <span className="brand-desc">Befundungsassistent</span>
           </div>
         </div>
 
-        {/* Status indicator */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className={`h-2.5 w-2.5 rounded-full ${status === 'recording' ? 'bg-red-500 pulse-recording' : status === 'processing' ? 'bg-yellow-500' : 'bg-green-500'}`} />
-            <span className="text-sm font-semibold tracking-wide" style={{ color: status === 'recording' ? 'var(--recording-red)' : status === 'processing' ? 'var(--warning-yellow)' : 'var(--ready-green)' }}>
-              {statusText.toUpperCase()}
-            </span>
+        {/* Status indicator & selectors */}
+        <div className="header-actions">
+          <div className="status-badge" style={{ color: status === 'recording' ? 'var(--recording-red)' : status === 'processing' ? 'var(--warning-yellow)' : 'var(--ready-green)' }}>
+            <span className={`status-dot ${status === 'recording' ? 'recording' : status === 'processing' ? 'processing' : 'ready'}`} />
+            <span>{statusText.toUpperCase()}</span>
           </div>
 
           {/* Template Selection Dropdown */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Vorlage:</span>
+          <div className="template-selector-group">
+            <span className="select-label">Vorlage:</span>
             <select
               value={selectedTemplateKey}
               onChange={e => setSelectedTemplateKey(e.target.value)}
-              className="px-3 py-2 rounded-lg border outline-none text-white text-sm font-medium focus:ring-1 focus:ring-purple-500 cursor-pointer"
-              style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-color)' }}
+              className="select-input"
             >
               {Object.keys(templates).map(key => (
                 <option key={key} value={key}>
@@ -700,7 +691,7 @@ export default function App() {
           {/* Settings button */}
           <button 
             onClick={() => setShowSettings(!showSettings)}
-            className="p-2 rounded-lg hover:bg-gray-850 text-gray-400 hover:text-white transition-all cursor-pointer"
+            className="icon-btn"
             title="Einstellungen"
           >
             <Settings size={20} />
@@ -709,7 +700,7 @@ export default function App() {
           {/* Logout button */}
           <button 
             onClick={handleLogout}
-            className="p-2 rounded-lg hover:bg-gray-850 text-gray-400 hover:text-red-400 transition-all cursor-pointer"
+            className="icon-btn logout"
             title="Abmelden"
           >
             <LogOut size={20} />
@@ -718,18 +709,18 @@ export default function App() {
       </header>
 
       {/* Main Workspace */}
-      <main className="flex-grow p-6 grid grid-cols-1 lg:grid-cols-2 gap-6" style={{ contentVisibility: 'auto' }}>
+      <main className="workspace-grid">
         {/* Left Side: Live Transcription & Controls */}
-        <section className="glass-panel rounded-2xl border flex flex-col overflow-hidden" style={{ borderColor: 'var(--border-color)' }}>
-          <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-color)', backgroundColor: 'rgba(22, 25, 44, 0.4)' }}>
-            <div className="flex items-center gap-2">
-              <Mic size={18} className="text-purple-400" style={{ color: 'var(--accent-purple)' }} />
-              <h2 className="text-sm font-bold uppercase tracking-wider text-gray-400">Live-Diktat & Spracherkennung</h2>
+        <section className="workspace-card">
+          <div className="card-header">
+            <div className="card-title-group">
+              <Mic className="card-icon" size={18} />
+              <h2 className="card-title">Live-Diktat & Spracherkennung</h2>
             </div>
-            <span className="text-xs text-gray-500 font-semibold uppercase font-mono">Engine: {sttEngine.toUpperCase()}</span>
+            <span className="card-badge">Engine: {sttEngine.toUpperCase()}</span>
           </div>
 
-          <div className="flex-grow p-5 flex flex-col">
+          <div className="card-body">
             <textarea
               value={transcript}
               onChange={e => {
@@ -740,211 +731,198 @@ export default function App() {
                 }
               }}
               placeholder="Hier erscheint das Live-Diktat... Sie können das Diktat auch manuell bearbeiten oder kopieren."
-              className="w-full flex-grow bg-transparent text-white font-medium leading-relaxed resize-none border-0 focus:ring-0 outline-none text-base"
+              className="text-editor"
             />
 
             {/* Level meter during recording */}
             {status === 'recording' && (
-              <div className="mt-4 p-3 bg-black bg-opacity-20 rounded-lg flex items-center gap-3">
-                <span className="text-xs text-gray-400 font-bold uppercase">Pegel</span>
-                <div className="flex-grow bg-gray-800 h-2.5 rounded-full overflow-hidden">
+              <div className="level-meter-container">
+                <span className="level-meter-label">Pegel</span>
+                <div className="level-meter-track">
                   <div 
-                    className="bg-green-500 h-full transition-all duration-75"
-                    style={{ width: `${micLevel}%`, backgroundColor: 'var(--ready-green)' }}
+                    className="level-meter-bar"
+                    style={{ width: `${micLevel}%` }}
                   />
                 </div>
-                <span className="text-xs font-mono text-gray-400">{micLevel}%</span>
+                <span className="level-meter-value">{micLevel}%</span>
               </div>
             )}
+          </div>
 
-            {/* Micro button & Actions */}
-            <div className="mt-5 pt-4 border-t flex items-center justify-between" style={{ borderColor: 'var(--border-color)' }}>
-              <div className="flex gap-2">
-                <button
-                  onClick={handleReset}
-                  className="px-4 py-2.5 rounded-lg border text-sm font-semibold hover:bg-gray-800 transition-all text-gray-300 cursor-pointer"
-                  style={{ borderColor: 'var(--border-color)' }}
-                >
-                  Zurücksetzen
-                </button>
-              </div>
+          <div className="card-footer">
+            <button onClick={handleReset} className="btn btn-secondary">
+              Zurücksetzen
+            </button>
 
-              <div className="flex items-center gap-3">
-                {status === 'recording' ? (
-                  <button
-                    onClick={stopRecording}
-                    className="px-6 py-3 bg-red-600 hover:bg-red-750 rounded-xl font-bold text-white flex items-center gap-2 transition-all shadow-lg shadow-red-900/30 cursor-pointer"
-                    style={{ backgroundColor: 'var(--recording-red)' }}
-                  >
-                    <MicOff size={18} /> Aufnahme Stoppen
-                  </button>
-                ) : (
-                  <button
-                    onClick={startRecording}
-                    disabled={status === 'processing'}
-                    className="px-6 py-3 bg-indigo-600 hover:bg-indigo-750 disabled:opacity-50 rounded-xl font-bold text-white flex items-center gap-2 transition-all shadow-lg shadow-indigo-900/30 cursor-pointer"
-                    style={{ backgroundColor: 'var(--accent-purple)' }}
-                  >
-                    <Mic size={18} /> Aufnahme Starten
-                  </button>
-                )}
-              </div>
-            </div>
+            {status === 'recording' ? (
+              <button onClick={stopRecording} className="btn btn-danger pulse-recording">
+                <MicOff size={18} /> Aufnahme Stoppen
+              </button>
+            ) : (
+              <button onClick={startRecording} disabled={status === 'processing'} className="btn btn-primary">
+                <Mic size={18} /> Aufnahme Starten
+              </button>
+            )}
           </div>
         </section>
 
         {/* Right Side: Structured Report */}
-        <section className="glass-panel rounded-2xl border flex flex-col overflow-hidden" style={{ borderColor: 'var(--border-color)' }}>
-          <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-color)', backgroundColor: 'rgba(22, 25, 44, 0.4)' }}>
-            <div className="flex items-center gap-2">
-              <Sparkles size={18} className="text-purple-400" style={{ color: 'var(--accent-purple)' }} />
-              <h2 className="text-sm font-bold uppercase tracking-wider text-gray-400">Strukturierter Befund</h2>
+        <section className="workspace-card">
+          <div className="card-header">
+            <div className="card-title-group">
+              <Sparkles className="card-icon" size={18} />
+              <h2 className="card-title">Strukturierter Befund</h2>
             </div>
             
             {isCopied && (
-              <span className="text-xs px-2.5 py-1 rounded bg-green-950 text-green-300 font-semibold border border-green-800 flex items-center gap-1">
-                <Check size={12} /> In Zwischenablage kopiert!
+              <span className="copied-badge">
+                <Check size={12} /> Kopiert!
               </span>
             )}
           </div>
 
-          <div className="flex-grow p-5 flex flex-col">
+          <div className="card-body">
             <textarea
               value={structuredReport}
               readOnly
               placeholder="Der strukturierte Bericht wird nach Abschluss des Diktats hier eingefügt."
-              className="w-full flex-grow bg-transparent text-white font-medium leading-relaxed resize-none border-0 focus:ring-0 outline-none text-base"
+              className="text-editor"
             />
+          </div>
 
-            <div className="mt-5 pt-4 border-t flex items-center justify-between" style={{ borderColor: 'var(--border-color)' }}>
-              <span className="text-xs text-gray-500 font-medium">Kopieren Sie das Ergebnis für RIS oder Word.</span>
-              
-              <button
-                onClick={handleCopyReport}
-                disabled={!structuredReport}
-                className="px-5 py-2.5 rounded-lg border hover:bg-gray-800 disabled:opacity-50 text-sm font-semibold flex items-center gap-2 text-white transition-all cursor-pointer"
-                style={{ borderColor: 'var(--border-color)' }}
-              >
-                <Copy size={16} /> Befund Kopieren
-              </button>
-            </div>
+          <div className="card-footer">
+            <span className="footer-info">Kopieren Sie das Ergebnis für RIS oder Word.</span>
+            
+            <button
+              onClick={handleCopyReport}
+              disabled={!structuredReport}
+              className="btn btn-secondary"
+            >
+              <Copy size={16} /> Befund Kopieren
+            </button>
           </div>
         </section>
       </main>
 
       {/* Settings Dialog (Modal) */}
       {showSettings && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-6 z-50 overflow-y-auto">
-          <div className="glass-panel w-full max-w-2xl p-6 rounded-2xl border space-y-6 max-h-[90vh] overflow-y-auto" style={{ borderColor: 'var(--border-color)' }}>
-            <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: 'var(--border-color)' }}>
-              <h2 className="text-xl font-bold flex items-center gap-2"><Settings size={22} className="text-purple-400" /> Konfiguration & Schlüssel</h2>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2 className="modal-title"><Settings size={22} className="card-icon" /> Konfiguration & Schlüssel</h2>
               <button 
                 onClick={() => setShowSettings(false)}
-                className="text-gray-400 hover:text-white cursor-pointer text-2xl"
+                className="modal-close"
               >
                 &times;
               </button>
             </div>
 
-            {/* STT Config */}
-            <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-purple-400">1. Spracherkennung (Speech-to-Text)</h3>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <label className="p-3 bg-gray-900 bg-opacity-50 rounded-lg border flex items-center gap-3 cursor-pointer" style={{ borderColor: sttEngine === 'browser' ? 'var(--accent-purple)' : 'var(--border-color)' }}>
-                  <input 
-                    type="radio" 
-                    name="stt_engine" 
-                    value="browser"
-                    checked={sttEngine === 'browser'}
-                    onChange={() => setSttEngine('browser')}
-                    className="text-purple-600 focus:ring-purple-500"
-                  />
-                  <div>
-                    <span className="block font-bold text-white text-sm">Browser-Erkennung (Free)</span>
-                    <span className="block text-xs text-gray-400">Verwendet eingebaute Browser-STT. Kein API-Schlüssel nötig.</span>
+            <div className="modal-body">
+              {/* STT Config */}
+              <div className="settings-section">
+                <h3 className="settings-sec-title">1. Spracherkennung (Speech-to-Text)</h3>
+                
+                <div className="settings-grid">
+                  <div 
+                    className={`engine-option-card ${sttEngine === 'browser' ? 'selected' : ''}`}
+                    onClick={() => setSttEngine('browser')}
+                  >
+                    <input 
+                      type="radio" 
+                      name="stt_engine" 
+                      value="browser"
+                      checked={sttEngine === 'browser'}
+                      readOnly
+                      className="engine-radio"
+                    />
+                    <div>
+                      <span className="engine-title">Browser-Erkennung (Free)</span>
+                      <span className="engine-desc">Nutzt die eingebaute Spracherkennung von Chrome/Edge. Kein Setup nötig.</span>
+                    </div>
                   </div>
-                </label>
 
-                <label className="p-3 bg-gray-900 bg-opacity-50 rounded-lg border flex items-center gap-3 cursor-pointer" style={{ borderColor: sttEngine === 'google' ? 'var(--accent-purple)' : 'var(--border-color)' }}>
-                  <input 
-                    type="radio" 
-                    name="stt_engine" 
-                    value="google"
-                    checked={sttEngine === 'google'}
-                    onChange={() => setSttEngine('google')}
-                    className="text-purple-600 focus:ring-purple-500"
-                  />
-                  <div>
-                    <span className="block font-bold text-white text-sm">Google Cloud STT</span>
-                    <span className="block text-xs text-gray-400">Sehr präzises medizinisches Diktat. Benötigt Google API-Key.</span>
+                  <div 
+                    className={`engine-option-card ${sttEngine === 'google' ? 'selected' : ''}`}
+                    onClick={() => setSttEngine('google')}
+                  >
+                    <input 
+                      type="radio" 
+                      name="stt_engine" 
+                      value="google"
+                      checked={sttEngine === 'google'}
+                      readOnly
+                      className="engine-radio"
+                    />
+                    <div>
+                      <span className="engine-title">Google Cloud STT</span>
+                      <span className="engine-desc">Sehr präzises medizinisches Diktat. Benötigt Google API-Key.</span>
+                    </div>
                   </div>
-                </label>
+                </div>
+
+                {sttEngine === 'google' && (
+                  <div style={{ marginTop: '12px' }}>
+                    <label className="form-label">Google Cloud API-Key</label>
+                    <input 
+                      type="password"
+                      value={googleApiKey}
+                      onChange={e => setGoogleApiKey(e.target.value)}
+                      placeholder="AIzaSy..."
+                      className="form-input"
+                    />
+                    <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '4px', display: 'block' }}>
+                      Tipp: Erstellen Sie einen API-Schlüssel in der Google Cloud Console mit Zugriff auf Speech-to-Text.
+                    </span>
+                  </div>
+                )}
               </div>
 
-              {sttEngine === 'google' && (
+              {/* LLM Config */}
+              <div className="settings-section" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '20px' }}>
+                <h3 className="settings-sec-title">2. KI-Strukturierung (LLM)</h3>
+                
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Google Cloud API-Key</label>
+                  <label className="form-label">Gemini API-Key</label>
                   <input 
                     type="password"
-                    value={googleApiKey}
-                    onChange={e => setGoogleApiKey(e.target.value)}
-                    placeholder="AIzaSy..."
-                    className="w-full px-3 py-2 rounded-lg border outline-none text-white text-sm"
-                    style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-color)' }}
+                    value={geminiApiKey}
+                    onChange={e => setGeminiApiKey(e.target.value)}
+                    placeholder="Hinterlegen Sie Ihren Gemini API-Key"
+                    className="form-input"
                   />
-                  <span className="text-xs text-gray-500 mt-1 block">Tipp: Erstellen Sie einen API-Schlüssel in der Google Cloud Console mit Zugriff auf Speech-to-Text.</span>
+                  <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '4px', display: 'block' }}>
+                    Für kostenlose Testzwecke können Sie einen Key im Google AI Studio erstellen. Bleibt das Feld leer, läuft ein lokaler Demo-Mock.
+                  </span>
                 </div>
-              )}
-            </div>
+              </div>
 
-            {/* LLM Config */}
-            <div className="space-y-4 border-t pt-4" style={{ borderColor: 'var(--border-color)' }}>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-purple-400">2. KI-Strukturierung (LLM)</h3>
-              
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Gemini API-Key</label>
-                <input 
-                  type="password"
-                  value={geminiApiKey}
-                  onChange={e => setGeminiApiKey(e.target.value)}
-                  placeholder="Hinterlegen Sie Ihren Gemini API-Key"
-                  className="w-full px-3 py-2 rounded-lg border outline-none text-white text-sm"
-                  style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-color)' }}
+              {/* Prompt Config */}
+              <div className="settings-section" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '20px' }}>
+                <h3 className="settings-sec-title">3. System-Prompt konfigurieren</h3>
+                <textarea
+                  value={systemPrompt}
+                  onChange={e => setSystemPrompt(e.target.value)}
+                  rows={6}
+                  className="settings-textarea"
                 />
-                <span className="text-xs text-gray-500 mt-1 block">Für kostenlose Testzwecke können Sie einen Key im Google AI Studio erstellen. Bleibt das Feld leer, läuft ein lokaler Demo-Mock.</span>
               </div>
             </div>
 
-            {/* Prompt Config */}
-            <div className="space-y-4 border-t pt-4" style={{ borderColor: 'var(--border-color)' }}>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-purple-400">3. System-Prompt konfigurieren</h3>
-              <textarea
-                value={systemPrompt}
-                onChange={e => setSystemPrompt(e.target.value)}
-                rows={6}
-                className="w-full px-3 py-2 rounded-lg border outline-none text-white text-sm font-mono"
-                style={{ backgroundColor: 'var(--bg-input)', borderColor: 'var(--border-color)' }}
-              />
-            </div>
-
-            {/* Actions */}
-            <div className="border-t pt-4 flex items-center justify-between" style={{ borderColor: 'var(--border-color)' }}>
-              <span className="text-xs text-yellow-500 flex items-center gap-1">
-                <Info size={14} /> Schlüssel werden lokal im Browser secured.
+            <div className="modal-footer">
+              <span className="footer-warning">
+                <Info size={14} /> Schlüssel werden lokal im Browser gesichert.
               </span>
-              <div className="flex gap-2">
+              <div className="modal-footer-actions">
                 <button
                   onClick={() => setShowSettings(false)}
-                  className="px-4 py-2 rounded-lg border text-sm text-gray-400 hover:text-white cursor-pointer"
-                  style={{ borderColor: 'var(--border-color)' }}
+                  className="btn btn-secondary"
                 >
                   Abbrechen
                 </button>
                 <button
                   onClick={saveConfig}
-                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm font-bold text-white flex items-center gap-2 cursor-pointer"
-                  style={{ backgroundColor: 'var(--accent-purple)' }}
+                  className="btn btn-primary"
                 >
                   <Save size={16} /> Speichern
                 </button>
