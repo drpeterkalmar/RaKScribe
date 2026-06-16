@@ -28,10 +28,53 @@ type TemplatesMap = {
 const templates = templatesData as TemplatesMap;
 
 const MEDICAL_PHRASES = [
-  "HWS", "LWS", "BWS", "MRT", "CT", "Sonographie", "Röntgen", "Mammographie", "DEXA", "DVT", "OPG",
-  "Spondylarthrose", "Coxarthrose", "Gonarthrose", "Meniskus", "Bandscheibenprolaps", "Fraktur", "Osteoporose",
-  "Rotatorenmanschette", "Karpaltunnel", "Nervus medianus", "Aneurysma", "Stenose", "Pleuraerguss", "Infiltrat"
+  "Hochauflösender Nervenschall", "Thorax pa/seitlich", "MRT", "MR", "CT", "Computertomografie", "DXA", "Knochendichtemessung",
+  "Humerus", "Femur", "Tibia", "Fibula", "Patella", "Karpaltunnel", "Rotatorenmanschette",
+  "Achillessehne", "Kalkaneus", "Acromioclaviculargelenk", "Sacroiliacalgelenk", "Halswirbelsäule (HWS)",
+  "Brustwirbelsäule (BWS)", "Lendenwirbelsäule (LWS)", "Kreuzband", "Tarsus", "Metatarsus",
+  "Fraktur", "Spondylarthrose", "Spondylarthrosen", "Spondylodese", "Spondyolyse", "Spondylosis deformans", "Spondylose", "pontifizierend", "pontifizierende", "Arthrose", "Coxarthrose", "Gonarthrose", "Meniskus", "Hinterhorn-Läsion",
+  "Korbhenkelriss", "Bandscheibenprolaps", "Spinalkanalstenose", "Osteochondrose", "Osteochondrosen", "Nearthrosis interspinosa",
+  "Osteomyelitis", "Rheumatoide Arthritis", "Kapsel-Band-Läsion", "Osteoporose", "Bakerzyste",
+  "Knochenödem", "Einklemmungssyndrom", "Arthrographie", "Szintigraphie", "Vertebroplastie",
+  "Facetteninfiltration", "CT-gesteuerte Biopsie", "MR-Arthrographie", "Skelettaufnahme", "Ganzbeinaufnahme",
+  "Gelenkspaltverschmälerung", "Subluxation", "Wirbelkörperkompression", "Rotatorenmanschettenruptur",
+  "Labrumläsion", "Subchondrale Sklerosierung", "Nervus medianus", "Nervus radialis",
+  "Liquor", "Zerebrospinalflüssigkeit", "Kortex", "Großhirnrinde", "Weiße Substanz", "Basalganglien",
+  "Hypophyse", "Corpus callosum", "Sinus cavernosus", "Aorta", "Arteria carotis interna", "Arteria carotis externa",
+  "Pulmonalarterie", "Vena cava superior", "Vena cava inferior", "A. vertebralis",
+  "Aneurysma", "Intrakranielles Aneurysma", "Ischämie", "Ischämischer Infarkt", "Intracranielle Blutung",
+  "Subarachnoidalblutung (SAB)", "Subduralhämatom (SDH)", "Epiduralhämatom (EDH)", "Multiple Sklerose (MS)",
+  "Hypophysenadenom", "Hydrozephalus", "Normaldruckhydrozephalus", "Vaskulitis", "Stenose", "Carotisstenose",
+  "Koronarstenose", "Dissektion", "Aortendissektion", "Thrombus", "Thrombose", "Embolie", "PAE", "Plaqubildung", "Softplaque",
+  "gemischte Plaqueformation", "IMT-Komplex", "Intima-Media-Hyperplasie", "Intimahyperplasie",
+  "Varizen", "T1-gewichtete Sequenz", "T2-gewichtete Sequenz", "Flair-Sequenz", "Diffusion-weighted Imaging (DWI)",
+  "Time-of-Flight (TOF) Angio", "MRA", "CTA", "Kontrastmittel (KM)", "Plaque", "Atherosklerotische Plaque",
+  "Angioplastie", "Sakkuläres Aneurysma", "Gefäßokklusion",
+  "Lunge", "Oberlappen", "Unterlappen", "Trachea", "Bronchien", "Mediastinum", "Herz", "Ventrikel",
+  "Perikard", "Leber", "Gallenblase", "Pankreas", "Niere", "Milz", "Uterus", "Adnexe", "Appendix",
+  "Schilddrüse", "Infiltrat", "Pulmonales Infiltrat", "Pleuraerguss", "Pneumothorax", "Spannungspneumothorax",
+  "Kardiomegalie", "Aortenklappeninsuffizienz", "Leberzirrhose", "Cholezystitis", "Pankreatitis",
+  "Nierenstein", "Ureterstein", "Nephrolithiasis", "Adnexitis", "Ovarielle Zyste", "Lymphknoten",
+  "Lymphadenopathie", "Appendizitis", "Struma", "Verschattung", "Milzruptur", "Hernie", "Hiatushernie",
+  "Inguinalhernie", "Dilatation", "Aszites", "Zystische Läsion", "Liquidation", "Faszienverdickung",
+  "Hydronephrose", "Peritonealkarzinose", "Fokale Raumforderung (FRF)", "Hyperdens", "Hypodens", "Isodens",
+  "Echoarm", "Echogen",
+  "Malignität", "Benignität", "Tumor", "Karzinom", "Metastase", "Läsion", "Atypisch", "unspezifisch",
+  "Degenerativ", "entzündlich", "Chronisch", "akut", "Ödem", "Hämatom", "Abszess", "Kalzifizierung",
+  "Sklerosierung", "Nekrose", "Atrophie", "Randscharf", "unscharf begrenzt", "Rückbildung", "Progression",
+  "V. a.", "Verdacht auf", "Differenzialdiagnose (DD)", "Interventionell", "Biopsie", "Drainage",
+  "Normalbefund", "kein Nachweis für", "Axial", "koronar", "sagittal", "Anamnese", "Indikation",
+  "Kontraindikation", "Artefakt", "Pixel", "Voxel", "Echoarmut", "Echogenität", "Hyperintens", "Hypointens",
+  "Dosis-Längen-Produkt (DLP)", "Field of View (FOV)", "Standard-Abweichung (SD)", "Flüssigkeitsspiegel",
+  "Röntgen-Thorax", "Projektionsaufnahme", "Z.n.", "Zustand nach", "Adenokarzinom", "Cholangiokarzinom",
+  "Fibrose", "Hämangiom", "Atelektase", "Bronchiektasen", "Emphysem", "Sarkom", "Neurofibrom", "Lipom",
+  "Aortenaneurysma", "Klaustrophobie", "Sequester", "Vollbild", "Partialruptur", "Tendinose", "Impingement",
+  "zerviko", "torako", "thoraco", "lumbal", "zervikothorakal", "zervikolumbal", "zervikotorakolumbal",
+  "zervikal", "thorakal", "Skoliose", "Retrolisthese", "Retrolisthesis", "Foramenstenose", "Foramenstenosen",
+  "Foraminalstenose", "Foraminalstenosen", "Ganzaufnahme", "Ganzaufnahmen", "L4 gegenüber L5", "L5/S1",
+  "Flachbogig", "S-förmige"
 ];
+
 
 // Helper to encode AudioBuffer to WAV
 function audioBufferToWav(buffer: AudioBuffer): Blob {
@@ -87,6 +130,45 @@ function writeString(view: DataView, offset: number, string: string) {
   }
 }
 
+function mergeFloat32Arrays(chunks: any[]): Float32Array {
+  const totalLength = chunks.reduce((acc, val) => acc + val.length, 0);
+  const mergedArray = new Float32Array(totalLength);
+  let offset = 0;
+  for (const chunk of chunks) {
+    mergedArray.set(chunk, offset);
+    offset += chunk.length;
+  }
+  return mergedArray;
+}
+
+function downsampleBuffer(buffer: any, inputSampleRate: number, outputSampleRate: number): Float32Array {
+  if (inputSampleRate === outputSampleRate) {
+    return buffer;
+  }
+  if (inputSampleRate < outputSampleRate) {
+    return buffer;
+  }
+  const sampleRateRatio = inputSampleRate / outputSampleRate;
+  const newLength = Math.round(buffer.length / sampleRateRatio);
+  const result = new Float32Array(newLength);
+  let offsetResult = 0;
+  let offsetBuffer = 0;
+  while (offsetResult < result.length) {
+    const nextOffsetBuffer = Math.round((offsetResult + 1) * sampleRateRatio);
+    let accum = 0;
+    let count = 0;
+    for (let i = offsetBuffer; i < nextOffsetBuffer && i < buffer.length; i++) {
+      accum += buffer[i];
+      count++;
+    }
+    result[offsetResult] = count > 0 ? accum / count : 0;
+    offsetResult++;
+    offsetBuffer = nextOffsetBuffer;
+  }
+  return result;
+}
+
+
 export default function App() {
   // Authentication State
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -110,6 +192,8 @@ export default function App() {
 
   // Application States
   const [status, setStatus] = useState<'ready' | 'recording' | 'processing' | 'copied'>('ready');
+  const statusRef = useRef(status);
+  statusRef.current = status;
   const [statusText, setStatusText] = useState<string>('Bereit');
   const [transcript, setTranscript] = useState<string>('');
   const [structuredReport, setStructuredReport] = useState<string>('');
@@ -159,6 +243,16 @@ export default function App() {
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const processorRef = useRef<ScriptProcessorNode | null>(null);
   const audioChunksRef = useRef<Float32Array[]>([]);
+
+  // States and refs for chunked transcription feedback
+  const [isTranscribingChunk, setIsTranscribingChunk] = useState<boolean>(false);
+  const chunkIntervalRef = useRef<any>(null);
+  const lastProcessedIndexRef = useRef<number>(0);
+  const chunkTranscriptsRef = useRef<string[]>([]);
+  const pendingPromisesRef = useRef<Promise<any>[]>([]);
+  const activeRequestsCountRef = useRef<number>(0);
+  const actualSampleRateRef = useRef<number>(16000);
+
 
   // Load configuration from local storage
   useEffect(() => {
@@ -247,6 +341,11 @@ export default function App() {
     };
 
     const draw = () => {
+      if (statusRef.current === 'recording') {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        animationFrameId = requestAnimationFrame(draw);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = 'rgba(140, 82, 255, 0.35)';
       ctx.strokeStyle = 'rgba(140, 82, 255, 0.08)';
@@ -712,6 +811,53 @@ export default function App() {
   };
 
   // Start Audio Recording
+  // Helper function to process the next chunk of recorded audio
+  const processNextAudioChunk = async () => {
+    const currentChunks = audioChunksRef.current;
+    const lastProcessedIndex = lastProcessedIndexRef.current;
+    
+    if (currentChunks.length > lastProcessedIndex) {
+      const segmentChunks = currentChunks.slice(lastProcessedIndex);
+      lastProcessedIndexRef.current = currentChunks.length;
+      
+      const merged = mergeFloat32Arrays(segmentChunks);
+      const currentSampleRate = actualSampleRateRef.current;
+      const resampled = downsampleBuffer(merged, currentSampleRate, 16000);
+      
+      if (resampled.length === 0) return;
+      
+      const ctxTemp = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
+      const audioBuf = ctxTemp.createBuffer(1, resampled.length, 16000);
+      audioBuf.copyToChannel(resampled as any, 0);
+      const wavBlob = audioBufferToWav(audioBuf);
+      ctxTemp.close();
+      
+      const chunkIdx = chunkTranscriptsRef.current.length;
+      chunkTranscriptsRef.current.push(''); // placeholder
+      
+      activeRequestsCountRef.current++;
+      setIsTranscribingChunk(true);
+      
+      const p = transcribeWithGoogle(wavBlob).then(text => {
+        chunkTranscriptsRef.current[chunkIdx] = text.trim();
+        const fullText = chunkTranscriptsRef.current.filter(t => t.trim()).join(' ');
+        setTranscript(fullText);
+        return text.trim();
+      }).catch(err => {
+        console.error("Fehler bei Chunk-Transkription:", err);
+        return '';
+      }).finally(() => {
+        activeRequestsCountRef.current--;
+        if (activeRequestsCountRef.current <= 0) {
+          setIsTranscribingChunk(false);
+        }
+      });
+      
+      pendingPromisesRef.current.push(p);
+    }
+  };
+
+  // Start Audio Recording
   const startRecording = async () => {
     try {
       setTranscript('');
@@ -719,13 +865,30 @@ export default function App() {
       setStatus('recording');
       setStatusText('Aufnahme läuft...');
       audioChunksRef.current = [];
+      
+      // Reset chunk refs
+      lastProcessedIndexRef.current = 0;
+      chunkTranscriptsRef.current = [];
+      pendingPromisesRef.current = [];
+      activeRequestsCountRef.current = 0;
+      setIsTranscribingChunk(false);
 
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Request microphone without DSP constraints to preserve raw speech quality
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false
+        }
+      });
       mediaStreamRef.current = stream;
 
+      // Start AudioContext at native preferred hardware sample rate (avoids resampling dropouts)
       const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-      const audioContext = new AudioContextClass({ sampleRate: 16000 });
+      const audioContext = new AudioContextClass();
       audioContextRef.current = audioContext;
+      actualSampleRateRef.current = audioContext.sampleRate;
+      console.log(`[AUDIO] AudioContext initialized at native sample rate: ${audioContext.sampleRate} Hz`);
 
       const source = audioContext.createMediaStreamSource(stream);
       const processor = audioContext.createScriptProcessor(4096, 1, 1);
@@ -736,12 +899,20 @@ export default function App() {
 
       processor.onaudioprocess = (e) => {
         const inputData = e.inputBuffer.getChannelData(0);
-        // Always accumulate WAV chunks for Google Cloud STT
         audioChunksRef.current.push(new Float32Array(inputData));
+        
         let sum = 0;
         for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
         setMicLevel(Math.min(100, Math.round(Math.sqrt(sum / inputData.length) * 400)));
       };
+
+      // Set up chunked interval for real-time visual feedback
+      if (chunkIntervalRef.current) {
+        clearInterval(chunkIntervalRef.current);
+      }
+      chunkIntervalRef.current = setInterval(async () => {
+        await processNextAudioChunk();
+      }, 6000);
 
     } catch (err: any) {
       console.error(err);
@@ -759,6 +930,55 @@ export default function App() {
     setStatusText('Verarbeite Audio...');
     setMicLevel(0);
 
+    if (chunkIntervalRef.current) {
+      clearInterval(chunkIntervalRef.current);
+      chunkIntervalRef.current = null;
+    }
+
+    // Process any remaining audio since the last interval tick BEFORE closing context
+    const currentChunks = audioChunksRef.current;
+    const lastProcessedIndex = lastProcessedIndexRef.current;
+    
+    if (currentChunks.length > lastProcessedIndex) {
+      const segmentChunks = currentChunks.slice(lastProcessedIndex);
+      lastProcessedIndexRef.current = currentChunks.length;
+      
+      const merged = mergeFloat32Arrays(segmentChunks);
+      const currentSampleRate = actualSampleRateRef.current;
+      const resampled = downsampleBuffer(merged, currentSampleRate, 16000);
+      
+      if (resampled.length > 0) {
+        const ctxTemp = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
+        const audioBuf = ctxTemp.createBuffer(1, resampled.length, 16000);
+        audioBuf.copyToChannel(resampled as any, 0);
+        const wavBlob = audioBufferToWav(audioBuf);
+        ctxTemp.close();
+        
+        const chunkIdx = chunkTranscriptsRef.current.length;
+        chunkTranscriptsRef.current.push(''); // placeholder
+        
+        activeRequestsCountRef.current++;
+        setIsTranscribingChunk(true);
+        
+        const p = transcribeWithGoogle(wavBlob).then(text => {
+          chunkTranscriptsRef.current[chunkIdx] = text.trim();
+          const fullText = chunkTranscriptsRef.current.filter(t => t.trim()).join(' ');
+          setTranscript(fullText);
+          return text.trim();
+        }).catch(err => {
+          console.error("Fehler bei verbleibender Chunk-Transkription:", err);
+          return '';
+        }).finally(() => {
+          activeRequestsCountRef.current--;
+          if (activeRequestsCountRef.current <= 0) {
+            setIsTranscribingChunk(false);
+          }
+        });
+        
+        pendingPromisesRef.current.push(p);
+      }
+    }
+
     if (processorRef.current) {
       processorRef.current.disconnect();
       processorRef.current = null;
@@ -773,22 +993,13 @@ export default function App() {
     }
 
     try {
-      let finalRawText = transcript;
-
-      // Always use Google Cloud STT
-      const totalLength = audioChunksRef.current.reduce((acc, val) => acc + val.length, 0);
-      const mergedArray = new Float32Array(totalLength);
-      let offset = 0;
-      for (const chunk of audioChunksRef.current) {
-        mergedArray.set(chunk, offset);
-        offset += chunk.length;
+      // Wait for any active/pending requests to finish
+      if (pendingPromisesRef.current.length > 0) {
+        setStatusText('Warte auf ausstehende Transkriptionen...');
+        await Promise.all(pendingPromisesRef.current);
       }
-      const ctxTemp = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
-      const audioBuf = ctxTemp.createBuffer(1, mergedArray.length, 16000);
-      audioBuf.copyToChannel(mergedArray, 0);
-      const wavBlob = audioBufferToWav(audioBuf);
-      ctxTemp.close();
-      finalRawText = await transcribeWithGoogle(wavBlob);
+
+      const finalRawText = chunkTranscriptsRef.current.filter(t => t.trim()).join(' ');
       setTranscript(finalRawText);
 
       if (!finalRawText.trim()) {
@@ -875,6 +1086,16 @@ export default function App() {
 
   // Reset fields
   const handleReset = () => {
+    if (chunkIntervalRef.current) {
+      clearInterval(chunkIntervalRef.current);
+      chunkIntervalRef.current = null;
+    }
+    lastProcessedIndexRef.current = 0;
+    chunkTranscriptsRef.current = [];
+    pendingPromisesRef.current = [];
+    activeRequestsCountRef.current = 0;
+    setIsTranscribingChunk(false);
+
     setTranscript('');
     setStructuredReport('');
     setStatus('ready');
@@ -882,8 +1103,6 @@ export default function App() {
   };
 
   // Refs to avoid stale closures in global keyboard event listeners
-  const statusRef = useRef(status);
-  statusRef.current = status;
   const startRecordingRef = useRef(startRecording);
   startRecordingRef.current = startRecording;
   const stopRecordingRef = useRef(stopRecording);
@@ -911,6 +1130,16 @@ export default function App() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
+  // Clean up interval on unmount
+  useEffect(() => {
+    return () => {
+      if (chunkIntervalRef.current) {
+        clearInterval(chunkIntervalRef.current);
+      }
+    };
+  }, []);
+
 
   // Render Login screen if not authenticated
   if (!isAuthenticated) {
@@ -1040,9 +1269,12 @@ export default function App() {
 
           <div className="card-body">
             <textarea
-              value={transcript}
+              value={transcript + (isTranscribingChunk ? " [..]" : "")}
               onChange={e => {
-                setTranscript(e.target.value);
+                const cleanVal = e.target.value.endsWith(" [..]")
+                  ? e.target.value.slice(0, -5)
+                  : e.target.value;
+                setTranscript(cleanVal);
               }}
               placeholder="Hier erscheint das Live-Diktat... Sie können das Diktat auch manuell bearbeiten oder kopieren."
               className="text-editor"
