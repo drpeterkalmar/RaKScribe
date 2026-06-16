@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg-main: #0B0D17;
+  --bg-card: #16192C;
+  --bg-input: #1D213A;
+  --border-color: #2D314D;
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --accent-purple: #8C52FF;
+  --accent-purple-hover: #7A45E5;
+  --ready-green: #12B76A;
+  --recording-red: #F04438;
+  --warning-yellow: #F39C12;
+  --glass-bg: rgba(22, 25, 44, 0.7);
+  --glass-border: rgba(45, 49, 77, 0.4);
+  --shadow: rgba(0, 0, 0, 0.4) 0px 10px 30px -10px;
+  
+  --sans-font: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono-font: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--sans-font);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-purple);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(240, 68, 56, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(240, 68, 56, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(240, 68, 56, 0);
+  }
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(18, 183, 106, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(18, 183, 106, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(18, 183, 106, 0);
+  }
+}
+
+.pulse-recording {
+  animation: pulse 1.8s infinite;
+}
+
+/* Typography & Layout Utility classes */
+.font-mono {
+  font-family: var(--mono-font);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #FFF 0%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}

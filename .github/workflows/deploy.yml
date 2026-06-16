@@ -1,0 +1,58 @@
+name: Deploy Web App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+# Berechtigungen für GITHUB_TOKEN zur Bereitstellung auf GitHub Pages festlegen
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ein einzelnes Concurrent Deployment erlauben
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: web_app/package-lock.json
+
+      - name: Abhängigkeiten installieren
+        run: |
+          cd web_app
+          npm ci
+
+      - name: Web-App bauen
+        run: |
+          cd web_app
+          npm run build
+
+      - name: GitHub Pages konfigurieren
+        uses: actions/configure-pages@v4
+
+      - name: Build-Ordner hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './web_app/dist'
+
+      - name: Auf GitHub Pages bereitstellen
+        id: deployment
+        uses: actions/deploy-pages@v4
