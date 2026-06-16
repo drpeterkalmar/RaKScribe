@@ -12,7 +12,6 @@ import {
   ArrowRight,
   Sparkles,
   Info,
-  AlertTriangle,
   X
 } from 'lucide-react';
 import templatesData from './templates.json';
@@ -826,7 +825,77 @@ export default function App() {
     return outputText;
   };
 
-  // Start Audio Recording
+  const testGoogleSTT = async (keyJson: any): Promise<void> => {
+    if (!keyJson) {
+      throw new Error('Google Cloud JSON-Schlüsseldatei fehlt.');
+    }
+
+    let url: string;
+    let authHeaders: Record<string, string> = { 'Content-Type': 'application/json' };
+
+    if (keyJson.type === 'service_account' && keyJson.private_key) {
+      const token = await getGoogleBearerToken(keyJson);
+      url = 'https://speech.googleapis.com/v1/speech:recognize';
+      authHeaders['Authorization'] = `Bearer ${token}`;
+    } else {
+      const apiKey = keyJson.api_key || keyJson.key || keyJson.apiKey;
+      if (!apiKey) throw new Error('JSON-Datei enthält weder "type":"service_account" noch "api_key".');
+      url = `https://speech.googleapis.com/v1/speech:recognize?key=${apiKey}`;
+    }
+
+    // Send a tiny silent audio chunk (160 samples of 0, which is 320 bytes)
+    const base64Silence = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"; 
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: authHeaders,
+      body: JSON.stringify({
+        config: {
+          encoding: 'LINEAR16',
+          sampleRateHertz: 16000,
+          languageCode: 'de-DE',
+        },
+        audio: { content: base64Silence },
+      }),
+    });
+
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      const errMsg = data.error?.message || `HTTP Fehler ${response.status}`;
+      throw new Error(`Google STT Fehler: ${errMsg}`);
+    }
+  };
+
+  const testGeminiAPI = async (keyJson: any, apiKey: string): Promise<void> => {
+    let url: string;
+    let authHeaders: Record<string, string> = { 'Content-Type': 'application/json' };
+
+    if (keyJson && keyJson.type === 'service_account' && keyJson.private_key) {
+      const token = await getGoogleBearerToken(keyJson);
+      url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+      authHeaders['Authorization'] = `Bearer ${token}`;
+    } else if (apiKey) {
+      url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    } else {
+      throw new Error("Weder ein Gemini API-Key noch eine Google Cloud Service-Account JSON-Datei ist konfiguriert.");
+    }
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: authHeaders,
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: "Hi" }] }],
+        generationConfig: { maxOutputTokens: 1 }
+      })
+    });
+
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      const errMsg = data.error?.message || `HTTP Fehler ${response.status}`;
+      throw new Error(`Gemini API Fehler: ${errMsg}`);
+    }
+  };
+
   // Helper function to process the next chunk of recorded audio
   const processNextAudioChunk = async () => {
     const currentChunks = audioChunksRef.current;
@@ -882,6 +951,23 @@ export default function App() {
         setStatus('ready');
         return;
       }
+
+      setStatusText("Verifiziere Schlüssel...");
+      setStatus('processing');
+
+      // Validate both Google Cloud STT credentials and Gemini API Key
+      try {
+        await Promise.all([
+          testGoogleSTT(googleKeyJson),
+          testGeminiAPI(googleKeyJson, geminiApiKey)
+        ]);
+      } catch (verifyErr: any) {
+        setStatus('ready');
+        setStatusText('Schlüssel ungültig');
+        alert("Fehler bei der Key-Verifikation:\n\n" + verifyErr.message + "\n\nBitte überprüfen Sie Ihre API-Schlüssel in den Einstellungen.");
+        return;
+      }
+
       setTranscript('');
       setStructuredReport('');
       setStatus('recording');
@@ -1066,26 +1152,16 @@ export default function App() {
       // Normal path: structure with LLM
       const examples = getFewShotExamples(finalRawText);
       const isLlmAvailable = !!geminiApiKey || (googleKeyJson && googleKeyJson.type === 'service_account' && googleKeyJson.private_key);
-      let structuredText = "";
-      if (isLlmAvailable) {
-        structuredText = await callGeminiLLM(
-          finalRawText, 
-          activeTemplate.body, 
-          activeTemplate.display_name, 
-          examples
-        );
-      } else {
-        setStatusText("Lokal simulierte KI-Strukturierung...");
-        await new Promise(r => setTimeout(r, 1200));
-        let formattedRaw = finalRawText.trim();
-        if (formattedRaw) {
-          formattedRaw = formattedRaw[0].toUpperCase() + formattedRaw.slice(1);
-          if (!formattedRaw.endsWith('.')) {
-            formattedRaw += '.';
-          }
-        }
-        structuredText = `## Befund\n${activeTemplate.body}\n\n## Ergebnis\n${formattedRaw}`;
+      if (!isLlmAvailable) {
+        throw new Error("KI-Strukturierung nicht möglich: Weder ein Gemini API-Key noch eine Google Cloud Service-Account JSON-Datei ist konfiguriert.");
       }
+
+      const structuredText = await callGeminiLLM(
+        finalRawText, 
+        activeTemplate.body, 
+        activeTemplate.display_name, 
+        examples
+      );
 
       setStructuredReport(structuredText);
       setStatus('ready');
@@ -1297,8 +1373,8 @@ export default function App() {
               <Sparkles size={14} className="status-bar-icon" /> Gemini 1.5 Flash aktiv ({googleKeyJson?.type === 'service_account' ? 'Dienstkonto' : 'API-Key'})
             </span>
           ) : (
-            <span className="status-bar-value warning">
-              <AlertTriangle size={14} className="status-bar-icon" /> Simulations-Modus (kein Key hinterlegt)
+            <span className="status-bar-value danger">
+              <X size={14} className="status-bar-icon" /> Inaktiv (Schlüssel fehlt)
             </span>
           )}
         </div>
@@ -1499,7 +1575,7 @@ export default function App() {
                     className="form-input"
                   />
                   <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '4px', display: 'block' }}>
-                    Für kostenlose Testzwecke können Sie einen Key im Google AI Studio erstellen. Bleibt das Feld leer, läuft ein lokaler Demo-Mock.
+                    Für kostenlose Testzwecke können Sie einen Key im Google AI Studio erstellen. Bleibt das Feld leer (und ist kein Google Dienstkonto geladen), ist die Strukturierung inaktiv.
                   </span>
                 </div>
               </div>
