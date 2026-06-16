@@ -300,6 +300,25 @@ def detect_template(text):
         elif any(x in text_lower for x in ["hüfte", "hüftgelenk", "hfte", "hft"]):
             return "beckenübersicht_und_hüfte"
 
+    # ── Gesamtwirbelsäule / Multi-Segment Erkennung (erweiterte Keywords) ──────
+    # Deckt ab: "Wirbelsäulen ganz Aufnahme", "zerviko-thorako-lumbal",
+    #           "toracco lumbal Skoliose", "Ganzwirbelsäule" etc.
+    has_cervical  = any(x in text_lower for x in ["hws", "zervik", "zerviko", "cervik", "cervico", "halswirbel"])
+    has_thoracic  = any(x in text_lower for x in ["bws", "thorakal", "thorako", "thoraco", "toracco", "brustwirbel"])
+    has_lumbar    = any(x in text_lower for x in ["lws", "lumbal", "lendenwirbel"])
+    is_full_spine = any(x in text_lower for x in ["ganzaufnahme", "gesamtwirbel", "ganzwirbel"]) or \
+                   ("ganz" in text_lower and "wirbels" in text_lower) or \
+                   ("gesamt" in text_lower and "wirbel" in text_lower) or \
+                   ("komplett" in text_lower and "wirbel" in text_lower)
+
+    if is_full_spine or (has_cervical and has_thoracic and has_lumbar):
+        return "wirbelsäule_gesamt"
+    if has_cervical and has_lumbar:
+        return "hws_und_lws"
+    if has_cervical and has_thoracic:
+        return "wirbelsäule_gesamt"
+    # ─────────────────────────────────────────────────────────────────────────
+
     if "hws" in text_lower and "lws" in text_lower:
         if "bws" in text_lower:
             return "wirbelsäule_gesamt"
@@ -1023,9 +1042,15 @@ class RaKScribeApp(ctk.CTk):
                 p_full = p_full + "\n\n" + examples_str
             
             sys_msg = (
-                "Du bist ein präziser Radiologie-Assistent. Strukturiere das Diktat unter "
-                "Verwendung des bereitgestellten Normalbefund-Templates. "
-                "Nutze ## Befund und ## Ergebnis als Haupttitel."
+                "Du bist ein präziser Radiologie-Assistent der Praxis 'Röntgen am Kai' – Dr. P. Kalmar / Dr. G. Riegler. "
+                "Strukturiere das Diktat exakt nach den historischen Befundvorlagen der Praxis. "
+                "Nutze ## Befund und ## Ergebnis als einzige Haupttitel. "
+                "Im ## Befund: Verwende das Template als strukturelle Basis, passe gezielt pathologische Abschnitte an, "
+                "behalte Normalbefunde unverändert, übernimm Messwerte exakt. "
+                "Im ## Ergebnis: Kurze präzise Diagnosen im Nominalstil (z.B. 'Intakte Hüft-TEP rechts.', "
+                "'Coxarthrose links.', 'STT-Arthrose beidseits.', 'Osteochondrosis pubis.', "
+                "'Beckenschiefstand nach links um 4 mm.'). "
+                "Gib ausschließlich den fertigen Befundtext aus – keine Kommentare, keine Einleitung."
             )
 
             report = ""
